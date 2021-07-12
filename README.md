@@ -8,4 +8,7 @@ The top level directory structure will be as follows:
 * utils - Utilities & helper functions and the like
 * pages - NextJS page files
 
+## Path aliasing
+Added path aliasing **(@folder-name)** is used to easily determine which files were imported locally and from library, this is very helpful for better organization of imports. Library imports should come first then local.
+
 ### [Structure reference](https://www.taniarascia.com/react-architecture-directory-structure)

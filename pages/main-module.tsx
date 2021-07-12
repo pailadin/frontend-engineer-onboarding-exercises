@@ -1,5 +1,5 @@
-import Layout from 'components/Layout'
-import ModuleComponent from 'modules/ModuleComponent'
+import Layout from '@components/Layout'
+import ModuleComponent from '@modules/ModuleComponent'
 
 export default function MainModule() {
   return (
