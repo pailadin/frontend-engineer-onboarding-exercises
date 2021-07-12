@@ -1,10 +1,13 @@
-import Layout from '@components/Layout'
-import ModuleComponent from '@modules/ModuleComponent'
+import Layout from '@components/Layout';
+import ModuleComponent from '@modules/ModuleComponent';
+import { FC } from 'react';
 
-export default function MainModule() {
-  return (
-    <Layout>
-      <div>Example for pages - modules directory relationship. <ModuleComponent /></div>
-    </Layout>
-  )
-}
+const MainModule: FC = () => (
+  <Layout>
+    <div>
+      Example for pages - modules directory relationship. <ModuleComponent />
+    </div>
+  </Layout>
+);
+
+export default MainModule;
