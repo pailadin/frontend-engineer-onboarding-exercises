@@ -19,5 +19,6 @@ Added path aliasing **(@folder-name)** is used to easily determine which files w
 - [Husky](https://typicode.github.io/husky/#/)
 - [Prettier](https://prettier.io/)
 - [Lint Staged](https://github.com/okonet/lint-staged)
+- [npm-check-updates](https://www.npmjs.com/package/npm-check-updates)
 
 ### [Structure reference](https://www.taniarascia.com/react-architecture-directory-structure)
