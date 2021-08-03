@@ -1,14 +1,19 @@
 import { Box, Button, Center } from '@chakra-ui/react';
 import { Container, Item } from '@components/form';
 import { FC } from 'react';
-import ForgotPassword from './ForgotPassword';
 
-const LoginComponent: FC = () => (
+const RegisterComponent: FC = () => (
   <Center>
-    <Container header="Log in">
+    <Container header="Sign up">
+      <Item label="First name" />
+
+      <Item label="Last name" />
+
       <Item label="Email" placeholder="email@example.com" />
 
-      <Item label="Password" placeholder="********" type="password" renderBelow={<ForgotPassword />} />
+      <Item label="Password" type="password" />
+
+      <Item label="Confirm Password" placeholder="Confirm password" type="password" />
 
       <Box />
 
@@ -17,4 +22,4 @@ const LoginComponent: FC = () => (
   </Center>
 );
 
-export default LoginComponent;
+export default RegisterComponent;

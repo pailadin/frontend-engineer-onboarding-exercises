@@ -9,7 +9,7 @@ interface Props {
   h?: string;
 }
 
-const FormContainer: FC<Props> = ({ children, header, bgColor = 'white', w = '50vw', h }) => (
+const FormContainer: FC<Props> = ({ children, header, bgColor = 'white', w = '40vw', h }) => (
   <Box bgColor={bgColor} w={w} h={h}>
     {header && (
       <>

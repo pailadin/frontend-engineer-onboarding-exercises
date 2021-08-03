@@ -8,14 +8,20 @@ interface Props {
   renderBelow?: ReactNode;
 }
 
-const FormItem: FC<Props> = ({ label, type, placeholder, renderBelow }) => (
-  <Stack spacing={3}>
-    <Text>{label}</Text>
+const FormItem: FC<Props> = ({ label, type, placeholder, renderBelow }) => {
+  if (placeholder === undefined) {
+    placeholder = `Enter ${String(label).toLowerCase()}`;
+  }
 
-    <Input type={type} placeholder={placeholder} />
+  return (
+    <Stack spacing={3}>
+      <Text>{label}</Text>
 
-    {renderBelow}
-  </Stack>
-);
+      <Input type={type} placeholder={placeholder} />
+
+      {renderBelow}
+    </Stack>
+  );
+};
 
 export default FormItem;
