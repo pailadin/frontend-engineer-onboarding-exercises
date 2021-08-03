@@ -1,7 +1,24 @@
-import { FC } from 'react'
+import { Box, Flex } from '@chakra-ui/react';
+import { FC, ReactNode } from 'react';
 
-const Layout: FC = ({ children }) => (
-  <div>This layout is reusable. {children}</div>
-)
+interface Props {
+  children: ReactNode;
+}
 
-export default Layout
+const Layout: FC<Props> = ({ children }) => (
+  <Flex h="100vh" direction="column">
+    <Box bgColor="red" p={4}>
+      header
+    </Box>
+
+    <Flex bgColor="gray.50" flexGrow={1} placeContent="center">
+      {children}
+    </Flex>
+
+    <Box bgColor="red" p={2}>
+      footer
+    </Box>
+  </Flex>
+);
+
+export default Layout;
