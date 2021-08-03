@@ -3,13 +3,13 @@ import { FC, ReactNode } from 'react';
 
 interface Props {
   children: ReactNode;
-  header: string;
+  header?: string;
   bgColor?: string;
   w?: string;
   h?: string;
 }
 
-const FormContainer: FC<Props> = ({ children, header, bgColor = 'white', w = '50vw', h = '50vh' }) => (
+const FormContainer: FC<Props> = ({ children, header, bgColor = 'white', w = '50vw', h }) => (
   <Box bgColor={bgColor} w={w} h={h}>
     {header && (
       <>
