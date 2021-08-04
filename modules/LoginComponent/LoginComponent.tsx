@@ -1,20 +1,42 @@
 import { Box, Button, Center } from '@chakra-ui/react';
 import { Container, Item } from '@components/form';
+import { LOGIN as LOGIN_VALIDATION } from '@constants/validation/user';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { FC } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+import * as yup from 'yup';
 import ForgotPassword from './ForgotPassword';
 
-const LoginComponent: FC = () => (
-  <Center>
-    <Container header="Log in">
-      <Item label="Email" placeholder="email@example.com" />
+const LoginComponent: FC = () => {
+  const schema = yup.object().shape(LOGIN_VALIDATION);
+  const formMethods = useForm({
+    mode: 'all',
+    resolver: yupResolver(schema),
+    defaultValues: { email: 'danielaranas@' },
+  });
 
-      <Item label="Password" placeholder="********" type="password" renderBelow={<ForgotPassword />} />
+  // eslint-disable-next-line no-console
+  const onSubmit = (data: unknown): void => console.log(data);
 
-      <Box />
+  return (
+    <Center>
+      <FormProvider {...formMethods}>
+        <form onSubmit={formMethods.handleSubmit(onSubmit)}>
+          <Container header="Log in">
+            <Item name="email" placeholder="email@example.com" />
 
-      <Button colorScheme="purple">Log in</Button>
-    </Container>
-  </Center>
-);
+            <Item name="password" placeholder="********" type="password" renderBelow={<ForgotPassword />} />
+
+            <Box />
+
+            <Button type="submit" colorScheme="purple">
+              Log in
+            </Button>
+          </Container>
+        </form>
+      </FormProvider>
+    </Center>
+  );
+};
 
 export default LoginComponent;
