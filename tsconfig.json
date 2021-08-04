@@ -6,6 +6,8 @@
       "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
       "@modules/*": ["modules/*"],
+      // https://github.com/microsoft/TypeScript/issues/26859:
+      "@store": ["store"],
       "@store/*": ["store/*"],
       "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"]
