@@ -1,25 +1,27 @@
-import { Box, Button, Center } from '@chakra-ui/react';
-import { Container, Item } from '@components/form';
+import { Center } from '@chakra-ui/react';
+import { FormContainer, Item } from '@components/form';
+import { REGISTER as VALIDATION_SCHEMA } from '@constants/validation/user';
 import { FC } from 'react';
 
-const RegisterComponent: FC = () => (
-  <Center>
-    <Container header="Sign up">
-      <Item label="First name" />
+const RegisterComponent: FC = () => {
+  // eslint-disable-next-line no-console
+  const onSubmit = (data: unknown): void => console.log(data);
 
-      <Item label="Last name" />
+  return (
+    <Center>
+      <FormContainer validationSchema={VALIDATION_SCHEMA} header="Sign up" onSubmit={onSubmit}>
+        <Item name="firstName" />
 
-      <Item label="Email" placeholder="email@example.com" />
+        <Item name="lastName" />
 
-      <Item label="Password" type="password" />
+        <Item name="email" placeholder="email@example.com" />
 
-      <Item label="Confirm Password" placeholder="Confirm password" type="password" />
+        <Item name="password" type="password" />
 
-      <Box />
-
-      <Button colorScheme="purple">Sign up</Button>
-    </Container>
-  </Center>
-);
+        <Item name="password2" label="Confirm password" type="password" />
+      </FormContainer>
+    </Center>
+  );
+};
 
 export default RegisterComponent;

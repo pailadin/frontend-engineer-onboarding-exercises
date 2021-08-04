@@ -1,7 +1,6 @@
 import { Center } from '@chakra-ui/react';
-import { Item } from '@components/form';
-import FormContainer from '@components/form/FormContainer';
-import { LOGIN as LOGIN_VALIDATION } from '@constants/validation/user';
+import { FormContainer, Item } from '@components/form';
+import { LOGIN as VALIDATION_SCHEMA } from '@constants/validation/user';
 import { FC } from 'react';
 import ForgotPassword from './ForgotPassword';
 
@@ -11,7 +10,7 @@ const LoginComponent: FC = () => {
 
   return (
     <Center>
-      <FormContainer validationSchema={LOGIN_VALIDATION} header="Log in" onSubmit={onSubmit}>
+      <FormContainer validationSchema={VALIDATION_SCHEMA} header="Log in" onSubmit={onSubmit}>
         <Item name="email" placeholder="email@example.com" />
 
         <Item name="password" placeholder="********" type="password" renderBelow={<ForgotPassword />} />

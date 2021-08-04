@@ -1,4 +1,4 @@
-import { FormControl, FormErrorMessage, FormLabel, Input, Stack } from '@chakra-ui/react';
+import { FormControl, FormErrorMessage, Input, Stack, Text } from '@chakra-ui/react';
 import { sentenceCase } from 'change-case';
 import { FC, ReactNode } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -10,7 +10,7 @@ interface Props {
   placeholder?: string;
   renderBelow?: ReactNode;
 }
-const FormItem: FC<Props> = ({ name, label, type, placeholder, renderBelow }) => {
+const Item: FC<Props> = ({ name, label, type, placeholder, renderBelow }) => {
   const {
     register,
     formState: { errors, isSubmitting },
@@ -27,9 +27,10 @@ const FormItem: FC<Props> = ({ name, label, type, placeholder, renderBelow }) =>
   return (
     <FormControl isInvalid={errors[name]}>
       <Stack spacing={3}>
-        <FormLabel htmlFor={name}>{label}</FormLabel>
+        <Text>{label}</Text>
 
-        <Input type={type} placeholder={placeholder} disabled={isSubmitting} {...register(name)} />
+        {/* TODO: Warning: Prop `id` did not match */}
+        <Input {...register(name)} type={type} placeholder={placeholder} disabled={isSubmitting} />
 
         <FormErrorMessage>{errors[name]?.message}</FormErrorMessage>
 
@@ -39,4 +40,4 @@ const FormItem: FC<Props> = ({ name, label, type, placeholder, renderBelow }) =>
   );
 };
 
-export default FormItem;
+export default Item;
