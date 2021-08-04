@@ -17,7 +17,7 @@ const RegisterComponent: FC = () => (
 
       <Box />
 
-      <Button colorScheme="purple">Log in</Button>
+      <Button colorScheme="purple">Sign up</Button>
     </Container>
   </Center>
 );
