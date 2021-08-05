@@ -14,16 +14,10 @@ interface Props {
   header?: string;
   onSubmit: (data: Record<string, unknown>) => void;
   submitButtonText?: string;
+  rest?: unknown;
 }
 
-const FormContainer: FC<Props> = ({
-  children,
-  validationSchema,
-  header,
-  onSubmit,
-  submitButtonText,
-  // TODO Search again about how to ""...rest"
-}) => {
+const FormContainer: FC<Props> = ({ children, validationSchema, header, onSubmit, submitButtonText, ...rest }) => {
   const formMethods = useForm({
     mode: 'all',
     resolver: yupResolver(yup.object().shape(validationSchema)),
@@ -36,7 +30,7 @@ const FormContainer: FC<Props> = ({
     <Center>
       <FormProvider {...formMethods}>
         <form onSubmit={formMethods.handleSubmit(onSubmit)}>
-          <Container header={header}>
+          <Container header={header} {...rest}>
             {children}
 
             <Box />

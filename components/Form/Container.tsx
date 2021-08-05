@@ -4,13 +4,11 @@ import { FC, ReactNode } from 'react';
 interface Props {
   children: ReactNode;
   header?: string;
-  bgColor?: string;
-  w?: string;
-  h?: string;
+  rest?: unknown;
 }
 
-const Container: FC<Props> = ({ children, header, bgColor = 'white', w = '40vw', h }) => (
-  <Box bgColor={bgColor} w={w} h={h}>
+const Container: FC<Props> = ({ children, header, ...rest }) => (
+  <Box bgColor="white" w="40vw" {...rest}>
     {header && (
       <>
         <Grid p={4} placeContent="center">
