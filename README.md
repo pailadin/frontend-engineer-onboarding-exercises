@@ -1,3 +1,7 @@
+# [VERCEL](https://hov-frontend-engineer-onboarding-exercises.vercel.app)
+
+# [GITHUB](https://github.com/pailadin/hov-frontend-engineer-onboarding-exercises)
+
 ## Directory Structure
 
 The top level directory structure will be as follows:
