@@ -1,4 +1,4 @@
-import { Box, Divider, Grid, Stack, Text } from '@chakra-ui/react';
+import { Box, Divider, Grid, Stack, Text, useBreakpointValue, useTheme } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
 
 interface Props {
@@ -7,24 +7,33 @@ interface Props {
   rest?: unknown;
 }
 
-const Container: FC<Props> = ({ children, header, ...rest }) => (
-  <Box bgColor="white" w="40vw" {...rest}>
-    {header && (
-      <>
-        <Grid p={4} placeContent="center">
-          <Text fontSize="3xl" fontWeight="bold">
-            {header}
-          </Text>
-        </Grid>
+const Container: FC<Props> = ({ children, header, ...rest }) => {
+  const theme = useTheme();
 
-        <Divider />
-      </>
-    )}
+  const minW = useBreakpointValue({
+    sm: '100vw',
+    md: theme.breakpoints.md,
+  });
 
-    <Grid p={6}>
-      <Stack spacing={6}>{children}</Stack>
-    </Grid>
-  </Box>
-);
+  return (
+    <Box bgColor="white" minW={minW} {...rest}>
+      {header && (
+        <>
+          <Grid p={4} placeContent="center">
+            <Text fontSize="3xl" fontWeight="bold">
+              {header}
+            </Text>
+          </Grid>
+
+          <Divider />
+        </>
+      )}
+
+      <Grid p={6}>
+        <Stack spacing={6}>{children}</Stack>
+      </Grid>
+    </Box>
+  );
+};
 
 export default Container;
