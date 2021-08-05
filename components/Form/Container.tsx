@@ -1,4 +1,4 @@
-import { Box, Divider, Grid, Stack, Text, useBreakpointValue, useTheme } from '@chakra-ui/react';
+import { Box, Divider, Grid, Stack, Text, useTheme } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
 
 interface Props {
@@ -10,13 +10,13 @@ interface Props {
 const Container: FC<Props> = ({ children, header, ...rest }) => {
   const theme = useTheme();
 
-  const minW = useBreakpointValue({
-    sm: '100vw',
+  const MIN_WIDTH = {
+    base: '100vw',
     md: theme.breakpoints.md,
-  });
+  };
 
   return (
-    <Box bgColor="white" minW={minW} {...rest}>
+    <Box bgColor="white" minWidth={MIN_WIDTH} {...rest}>
       {header && (
         <>
           <Grid p={4} placeContent="center">
