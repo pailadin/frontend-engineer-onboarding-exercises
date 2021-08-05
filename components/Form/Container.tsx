@@ -4,7 +4,7 @@ import { FC, ReactNode } from 'react';
 interface Props {
   children: ReactNode;
   header?: string;
-  rest?: unknown;
+  [x: string]: unknown;
 }
 
 const Container: FC<Props> = ({ children, header, ...rest }) => {

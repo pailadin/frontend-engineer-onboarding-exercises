@@ -14,7 +14,9 @@ interface Props {
   header?: string;
   onSubmit: (data: Record<string, unknown>) => void;
   submitButtonText?: string;
-  rest?: unknown;
+  // Taken from here: https://stackoverflow.com/a/58201122
+  // TODO Confirm if this is fine
+  [x: string]: unknown;
 }
 
 const FormContainer: FC<Props> = ({ children, validationSchema, header, onSubmit, submitButtonText, ...rest }) => {
