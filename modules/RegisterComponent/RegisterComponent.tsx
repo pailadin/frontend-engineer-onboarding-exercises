@@ -1,4 +1,4 @@
-import { Center } from '@chakra-ui/react';
+import { Center, useToast } from '@chakra-ui/react';
 import { FormContainer, Item } from '@components/Form';
 import { REGISTER as VALIDATION_SCHEMA } from '@constants/validation/user';
 import { useAppDispatch as useDispatch } from '@store/hooks';
@@ -7,13 +7,32 @@ import { FC } from 'react';
 
 const RegisterComponent: FC = () => {
   const dispatch = useDispatch();
+  const toast = useToast();
 
   const onSubmit = async (data: unknown): Promise<unknown> => {
     try {
-      return await dispatch(getFakeUserData(data));
+      const response = await dispatch(getFakeUserData(data));
+
+      // TODO This doesn't feel correct
+      if ('error' in response) {
+        throw response.error;
+      }
+
+      toast({
+        title: 'Registered successfully',
+        description: 'Pls check Redux store',
+        status: 'success',
+        isClosable: true,
+      });
+
+      return response;
     } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error(e);
+      toast({
+        title: 'Error!',
+        description: e.message || String(e),
+        status: 'error',
+        isClosable: true,
+      });
     }
   };
 
