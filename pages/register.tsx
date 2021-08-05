@@ -3,7 +3,7 @@ import Component from '@modules/RegisterComponent';
 import { FC } from 'react';
 
 const RegisterModule: FC = () => (
-  <Layout>
+  <Layout hideFooter={true}>
     <Component />
   </Layout>
 );

@@ -3,7 +3,7 @@ import Component from '@modules/LoginComponent';
 import { FC } from 'react';
 
 const LoginModule: FC = () => (
-  <Layout>
+  <Layout hideFooter={true}>
     <Component />
   </Layout>
 );

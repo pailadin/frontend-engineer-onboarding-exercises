@@ -9,9 +9,10 @@ const MIN_WIDTH = {
 
 interface Props {
   children: ReactNode;
+  hideFooter?: boolean;
 }
 
-const Layout: FC<Props> = ({ children }) => {
+const Layout: FC<Props> = ({ children, hideFooter = false }) => {
   return (
     <Flex height="100vh" direction="column">
       <Header />
@@ -20,7 +21,7 @@ const Layout: FC<Props> = ({ children }) => {
         {children}
       </Flex>
 
-      <Footer />
+      {!hideFooter && <Footer />}
     </Flex>
   );
 };
