@@ -4,9 +4,6 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "predeploy": "npm run build && npm run delete-cache",
-    "delete-cache": "rmdir \".next/cache\" /S /Q",
-    "deploy": "gh-pages -d .next",
     "build": "next build",
     "start": "next start",
     "tsc-node": "tsc -p tsconfig.json",
@@ -56,7 +53,6 @@
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "gh-pages": "^3.2.3",
     "husky": "^4.3.8",
     "lint-staged": "^11.0.0",
     "npm-check-updates": "^11.8.2",
