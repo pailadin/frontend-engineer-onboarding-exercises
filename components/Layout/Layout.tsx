@@ -1,23 +1,22 @@
-import { Box, Flex, useBreakpointValue } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
+import Header from './Header';
+
+const MIN_WIDTH = {
+  md: '80vw',
+  base: '100vw',
+};
 
 interface Props {
   children: ReactNode;
 }
 
 const Layout: FC<Props> = ({ children }) => {
-  const minW = useBreakpointValue({
-    md: '80vw',
-    sm: '100vw',
-  });
-
   return (
-    <Flex h="100vh" direction="column">
-      <Box bgColor="red" p={4}>
-        header
-      </Box>
+    <Flex height="100vh" direction="column">
+      <Header />
 
-      <Flex bgColor="gray.50" flexGrow={1} placeContent="center" minW={minW}>
+      <Flex bgColor="gray.50" flexGrow={1} placeContent="center" minWidth={MIN_WIDTH}>
         {children}
       </Flex>
 
