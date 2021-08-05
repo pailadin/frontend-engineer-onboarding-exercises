@@ -1,6 +1,6 @@
-import { Box, Flex } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import { FC, ReactNode } from 'react';
-import Header from './Header';
+import { Footer, Header } from './HeaderFooter';
 
 const MIN_WIDTH = {
   md: '80vw',
@@ -20,9 +20,7 @@ const Layout: FC<Props> = ({ children }) => {
         {children}
       </Flex>
 
-      <Box bgColor="red" p={2}>
-        footer
-      </Box>
+      <Footer />
     </Flex>
   );
 };
