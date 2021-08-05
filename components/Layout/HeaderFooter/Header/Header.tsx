@@ -2,8 +2,8 @@ import { Box, Center } from '@chakra-ui/react';
 import NextImage from 'next/image';
 import React, { FC } from 'react';
 import Container from '../Container';
+import Stack from '../Stack';
 import ButtonLink from './ButtonLink';
-import Stack from './Stack';
 import TextLink from './TextLink';
 
 const LayoutHeader: FC = () => {
