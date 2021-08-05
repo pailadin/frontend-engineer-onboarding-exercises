@@ -1,7 +1,7 @@
 // Currently used by the Login and Register modules
 // TODO Ask if this component should even be here, or combine those modules, or something else:
 import { Box, Button, Center } from '@chakra-ui/react';
-import { Container } from '@components/formxxx';
+import { Container } from '@components/Form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FC, ReactNode } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';

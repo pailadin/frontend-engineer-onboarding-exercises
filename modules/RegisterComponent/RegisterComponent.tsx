@@ -1,5 +1,5 @@
 import { Center } from '@chakra-ui/react';
-import { FormContainer, Item } from '@components/formxxx';
+import { FormContainer, Item } from '@components/Form';
 import { REGISTER as VALIDATION_SCHEMA } from '@constants/validation/user';
 import { FC } from 'react';
 
