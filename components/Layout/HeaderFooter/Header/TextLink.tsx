@@ -15,7 +15,12 @@ const TextLink: FC<Props> = ({ children, href, ...rest }) => {
   const isCurrentRoute = pathname === href;
 
   return (
-    <Flex cursor="pointer" borderBottom={`4px solid ${isCurrentRoute ? 'red' : 'transparent'}`}>
+    <Flex
+      cursor="pointer"
+      borderBottomWidth="3px"
+      borderBottomStyle="solid"
+      borderBottomColor={isCurrentRoute ? 'purple.600' : 'transparent'}
+    >
       <NextLink href={href}>
         <Center>
           <Text fontWeight={isCurrentRoute ? 'bold' : 'normal'} {...rest}>
