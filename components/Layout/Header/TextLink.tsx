@@ -6,9 +6,10 @@ import { FC } from 'react';
 interface Props {
   children: string;
   href: string;
+  rest?: unknown;
 }
 
-const HeaderLink: FC<Props> = ({ children, href }) => {
+const TextLink: FC<Props> = ({ children, href, ...rest }) => {
   const { pathname } = useRouter();
 
   const isCurrentRoute = pathname === href;
@@ -17,11 +18,13 @@ const HeaderLink: FC<Props> = ({ children, href }) => {
     <Flex cursor="pointer" borderBottom={`4px solid ${isCurrentRoute ? 'red' : 'transparent'}`}>
       <NextLink href={href}>
         <Center>
-          <Text fontWeight="bold">{children}</Text>
+          <Text fontWeight={isCurrentRoute ? 'bold' : 'normal'} {...rest}>
+            {children}
+          </Text>
         </Center>
       </NextLink>
     </Flex>
   );
 };
 
-export default HeaderLink;
+export default TextLink;
