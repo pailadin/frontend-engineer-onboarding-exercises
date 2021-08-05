@@ -38,7 +38,7 @@ const configSlice = createSlice({
       return {
         token,
         email,
-        name: [firstName, lastName].join(' '),
+        name: [firstName, lastName].filter((x) => x).join(' '),
       };
     },
   },
