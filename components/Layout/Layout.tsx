@@ -12,18 +12,16 @@ interface Props {
   hideFooter?: boolean;
 }
 
-const Layout: FC<Props> = ({ children, hideFooter = false }) => {
-  return (
-    <Flex height="100vh" direction="column">
-      <Header />
+const Layout: FC<Props> = ({ children, hideFooter = false }) => (
+  <Flex height="100vh" direction="column">
+    <Header />
 
-      <Flex bgColor="gray.50" flexGrow={1} placeContent="center" minWidth={MIN_WIDTH}>
-        {children}
-      </Flex>
-
-      {!hideFooter && <Footer />}
+    <Flex bgColor="gray.50" flexGrow={1} placeContent="center" minWidth={MIN_WIDTH}>
+      {children}
     </Flex>
-  );
-};
+
+    {!hideFooter && <Footer />}
+  </Flex>
+);
 
 export default Layout;
