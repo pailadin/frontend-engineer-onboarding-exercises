@@ -10,13 +10,14 @@ const MIN_WIDTH = {
 interface Props {
   children: ReactNode;
   hideFooter?: boolean;
+  [x: string]: unknown;
 }
 
-const Layout: FC<Props> = ({ children, hideFooter = false }) => (
+const Layout: FC<Props> = ({ children, hideFooter = false, ...rest }) => (
   <Flex height="100vh" direction="column">
     <Header />
 
-    <Flex bgColor="gray.50" flexGrow={1} placeContent="center" minWidth={MIN_WIDTH}>
+    <Flex bgColor="gray.50" flexGrow={1} placeContent="center" minWidth={MIN_WIDTH} {...rest}>
       {children}
     </Flex>
 
