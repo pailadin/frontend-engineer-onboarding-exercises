@@ -20,7 +20,7 @@ const getFakeUserData = createAsyncThunk('user/getFakeUserData', async (data: un
   return response.json();
 });
 
-const configSlice = createSlice({
+const userSlice = createSlice({
   name: 'config',
   initialState: INITIAL_STATE,
   reducers: {
@@ -44,8 +44,8 @@ const configSlice = createSlice({
   },
 });
 
-export default configSlice.reducer;
-export const { setUser, clearUser } = configSlice.actions;
+export default userSlice.reducer;
+export const { setUser, clearUser } = userSlice.actions;
 export { getFakeUserData };
 
 export const getUser = (state: RootState): User => state.user;
