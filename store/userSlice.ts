@@ -12,7 +12,7 @@ const INITIAL_STATE: User = {
 };
 
 const getFakeUserData = createAsyncThunk('user/getFakeUserData', async (data: unknown) => {
-  const response = await fetch('/api/hello', {
+  const response = await fetch('/api/fakeUserData', {
     method: 'post',
     body: JSON.stringify(data),
   });
