@@ -1,4 +1,4 @@
-import { Center, useToast } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 import { FormContainer, Item } from '@components/Form';
 import { REGISTER as VALIDATION_SCHEMA } from '@constants/validation/user';
 import { useAppDispatch as useDispatch } from '@store/hooks';
@@ -37,19 +37,17 @@ const RegisterComponent: FC = () => {
   };
 
   return (
-    <Center>
-      <FormContainer validationSchema={VALIDATION_SCHEMA} header="Sign up" onSubmit={onSubmit}>
-        <Item name="firstName" />
+    <FormContainer validationSchema={VALIDATION_SCHEMA} header="Sign up" onSubmit={onSubmit}>
+      <Item name="firstName" />
 
-        <Item name="lastName" />
+      <Item name="lastName" />
 
-        <Item name="email" placeholder="email@example.com" />
+      <Item name="email" placeholder="email@example.com" />
 
-        <Item name="password" type="password" />
+      <Item name="password" type="password" />
 
-        <Item name="password2" label="Confirm password" type="password" />
-      </FormContainer>
-    </Center>
+      <Item name="password2" label="Confirm password" type="password" />
+    </FormContainer>
   );
 };
 

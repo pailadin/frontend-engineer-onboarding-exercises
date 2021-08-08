@@ -1,4 +1,4 @@
-import { Center, useToast } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 import { FormContainer, Item } from '@components/Form';
 import { LOGIN as VALIDATION_SCHEMA } from '@constants/validation/user';
 import { useAppDispatch as useDispatch } from '@store/hooks';
@@ -38,13 +38,11 @@ const LoginComponent: FC = () => {
   };
 
   return (
-    <Center>
-      <FormContainer validationSchema={VALIDATION_SCHEMA} header="Log in" onSubmit={onSubmit}>
-        <Item name="email" placeholder="email@example.com" />
+    <FormContainer validationSchema={VALIDATION_SCHEMA} header="Log in" onSubmit={onSubmit}>
+      <Item name="email" placeholder="email@example.com" />
 
-        <Item name="password" placeholder="********" type="password" renderBelow={<ForgotPassword />} />
-      </FormContainer>
-    </Center>
+      <Item name="password" placeholder="********" type="password" renderBelow={<ForgotPassword />} />
+    </FormContainer>
   );
 };
 

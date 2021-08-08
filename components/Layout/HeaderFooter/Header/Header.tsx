@@ -1,5 +1,5 @@
 import { Box, Center } from '@chakra-ui/react';
-import NextImage from 'next/image';
+import Image from 'next/image';
 import React, { FC } from 'react';
 import Container from '../Container';
 import Stack from '../Stack';
@@ -12,7 +12,7 @@ const LayoutHeader: FC = () => {
       <Stack spacing={8}>
         <Box p={4}>
           <Center>
-            <NextImage src="/workflow-logo.png" height="30px" width="128px" />
+            <Image src="/workflow-logo.png" height="30px" width="128px" />
           </Center>
         </Box>
 
