@@ -1,4 +1,4 @@
-import { Center, SimpleGrid, Spinner, Text } from '@chakra-ui/react';
+import { Box, Center, Divider, SimpleGrid, Spinner, Text } from '@chakra-ui/react';
 import { useAppDispatch as useDispatch } from '@store/hooks';
 import { getFakeProductData, getProductFetchStatus, getProducts } from '@store/productSlice';
 import { FC, useEffect } from 'react';
@@ -35,24 +35,36 @@ const ProductsComponent: FC = () => {
   const someProducts = products.slice(0, 12);
 
   return (
-    <SimpleGrid
-      p={{
-        base: 0,
-        md: 2,
-        lg: 4,
-      }}
-      columns={{
-        base: 1,
-        md: 2,
-        lg: 3,
-        xl: 4,
-      }}
-      spacing={8}
-    >
-      {someProducts.map((product) => (
-        <Product key={product.id} {...products[0]} />
-      ))}
-    </SimpleGrid>
+    <Box pt={20} pb={8}>
+      <Text fontSize="3xl" fontWeight="bold">
+        Products
+      </Text>
+
+      <Divider mt={4} mb={8} />
+
+      <SimpleGrid
+        p={{
+          base: 0,
+          md: 2,
+          lg: 4,
+        }}
+        columns={{
+          base: 1,
+          md: 2,
+          lg: 3,
+          xl: 4,
+        }}
+        spacing={8}
+      >
+        {someProducts.map((product) => (
+          <Product key={product.id} {...products[0]} />
+        ))}
+      </SimpleGrid>
+
+      <Divider mt={8} />
+
+      <Text>TODO</Text>
+    </Box>
   );
 };
 
