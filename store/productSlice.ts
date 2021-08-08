@@ -10,11 +10,12 @@ interface Product {
 
 interface Products {
   products: Array<Product>;
-  status?: string;
+  status: string;
 }
 
 const INITIAL_STATE: Products = {
   products: [],
+  status: 'loading',
 };
 
 const getFakeProductData = createAsyncThunk('product/getFakeProductData', async () => {
