@@ -1,8 +1,9 @@
-import { Box, Center, Divider, Flex, Spinner, Text } from '@chakra-ui/react';
+import { Box, Center, Divider, Spinner, Text } from '@chakra-ui/react';
 import { useAppDispatch as useDispatch } from '@store/hooks';
 import { getFakeProductData, getProductFetchStatus, getProducts } from '@store/productSlice';
 import { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import Navigation from './Navigation';
 import ProductList from './ProductList';
 
 const ITEMS_PER_PAGE = 12;
@@ -38,7 +39,11 @@ const ProductsComponent: FC = () => {
   const numberOfProducts = Math.max(0, products.length); // probably unnecessary check;
   const lastPage = Math.ceil(numberOfProducts / ITEMS_PER_PAGE);
 
-  const goToPage = (x: number): void => setCurrentPage(Math.max(1, Math.min(lastPage, x)));
+  const goToPage = (page: number): number => {
+    const newPage = Math.max(1, Math.min(lastPage, page));
+    setCurrentPage(newPage);
+    return newPage;
+  };
 
   const productsForThisPage = products.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
@@ -54,10 +59,7 @@ const ProductsComponent: FC = () => {
 
       <Divider mt={8} />
 
-      <Flex justifyContent="space-between">
-        <Text onClick={(): void => goToPage(currentPage - 1)}>Prev</Text>
-        <Text onClick={(): void => goToPage(currentPage + 1)}>Next</Text>
-      </Flex>
+      <Navigation currentPage={currentPage} goToPage={goToPage} numberOfProducts={numberOfProducts} />
     </Box>
   );
 };
