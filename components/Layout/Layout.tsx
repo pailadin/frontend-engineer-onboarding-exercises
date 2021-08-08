@@ -14,10 +14,10 @@ const Layout: FC<Props> = ({ children, hideFooter = false }) => {
   };
 
   return (
-    <Flex height="100vh" direction="column">
+    <Flex minHeight="100vh" direction="column">
       <Header />
 
-      <Flex bgColor="gray.50" flexGrow={1} placeContent="center" width="100vw">
+      <Flex bgColor="gray.50" flexGrow={1} placeContent="center" width="100%">
         <Flex placeContent="center" width={WIDTH}>
           {children}
         </Flex>
