@@ -2,9 +2,10 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '.';
 
 interface Product {
+  id: number;
   title: string;
-  image?: string;
-  description?: string;
+  image: string;
+  description: string;
 }
 
 interface Products {

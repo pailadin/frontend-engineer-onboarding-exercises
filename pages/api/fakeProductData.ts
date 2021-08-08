@@ -8,7 +8,14 @@ const PRODUCT = {
 };
 
 const handler = (_req: NextApiRequest, res: NextApiResponse): void => {
-  res.status(200).json(Array(12 * 10).fill(PRODUCT));
+  res.status(200).json(
+    Array(12 * 10)
+      .fill(PRODUCT)
+      .map((x, i) => ({
+        id: i,
+        ...x,
+      }))
+  );
 };
 
 export default handler;

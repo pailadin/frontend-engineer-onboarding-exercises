@@ -17,8 +17,8 @@ const Layout: FC<Props> = ({ children, hideFooter = false }) => {
     <Flex height="100vh" direction="column">
       <Header />
 
-      <Flex bgColor="gray.50" flexGrow={1} placeContent="center" width="100vw" id="middle-outer">
-        <Flex flexGrow={1} placeContent="center" maxWidth={MAX_WIDTH} id="middle-inner">
+      <Flex bgColor="gray.50" flexGrow={1} placeContent="center" width="100vw">
+        <Flex flexGrow={1} placeContent="center" maxWidth={MAX_WIDTH}>
           {children}
         </Flex>
       </Flex>
