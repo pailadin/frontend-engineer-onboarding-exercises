@@ -51,6 +51,8 @@ const NavigationNumbers: FC<Props> = ({
     // Should already be sorted, but just in case:
     .sort((a, b) => a - b);
 
+  if (pagesToShow.length <= 1) return null;
+
   let prevPage;
   return (
     <Flex>
@@ -59,14 +61,14 @@ const NavigationNumbers: FC<Props> = ({
           prevPage = page;
           return (
             <Fragment key={page}>
-              <Text>...</Text>
-              <Number page={page} currentPage={currentPage} />
+              <Text alignSelf="center">...</Text>
+              <Number page={page} currentPage={currentPage} goToPage={goToPage} />
             </Fragment>
           );
         }
 
         prevPage = page;
-        return <Number key={page} page={page} currentPage={currentPage} />;
+        return <Number key={page} page={page} currentPage={currentPage} goToPage={goToPage} />;
       })}
     </Flex>
   );
