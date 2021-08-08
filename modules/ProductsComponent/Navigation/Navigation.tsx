@@ -1,5 +1,7 @@
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import { FC } from 'react';
+import { FaLongArrowAltLeft as ArrowLeftIcon, FaLongArrowAltRight as ArrowRightIcon } from 'react-icons/fa';
+import Arrow from './Arrow';
 
 const DEFAULT_ITEMS_PER_PAGE = 12;
 
@@ -21,8 +23,20 @@ const ProductsNavigation: FC<Props> = ({
 
   return (
     <Flex justifyContent="space-between">
-      <Text onClick={(): number => goToPage(currentPage - 1)}>Prev</Text>
-      <Text onClick={(): number => goToPage(currentPage + 1)}>Next</Text>
+      <Arrow
+        text="Previous"
+        icon={ArrowLeftIcon}
+        onClick={(): number => goToPage(currentPage - 1)}
+        disabled={currentPage === 1}
+        showIconFirst={true}
+      />
+
+      <Arrow
+        text="Next"
+        icon={ArrowRightIcon}
+        disabled={currentPage >= lastPage}
+        onClick={(): number => goToPage(currentPage + 1)}
+      />
     </Flex>
   );
 };
