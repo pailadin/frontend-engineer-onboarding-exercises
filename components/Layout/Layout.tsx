@@ -8,7 +8,7 @@ interface Props {
 }
 
 const Layout: FC<Props> = ({ children, hideFooter = false }) => {
-  const MAX_WIDTH = {
+  const WIDTH = {
     base: '100vw',
     md: '80vw',
   };
@@ -18,7 +18,7 @@ const Layout: FC<Props> = ({ children, hideFooter = false }) => {
       <Header />
 
       <Flex bgColor="gray.50" flexGrow={1} placeContent="center" width="100vw">
-        <Flex flexGrow={1} placeContent="center" maxWidth={MAX_WIDTH}>
+        <Flex placeContent="center" width={WIDTH}>
           {children}
         </Flex>
       </Flex>
