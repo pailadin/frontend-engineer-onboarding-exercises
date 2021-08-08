@@ -9,7 +9,7 @@ const PRODUCT = {
 
 const handler = (_req: NextApiRequest, res: NextApiResponse): void => {
   res.status(200).json(
-    Array(12 * 10)
+    Array(12 * 10 - 1)
       .fill(PRODUCT)
       .map((x, i) => ({
         id: i,
