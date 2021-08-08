@@ -2,6 +2,7 @@ import { Flex } from '@chakra-ui/react';
 import { FC } from 'react';
 import { FaLongArrowAltLeft as ArrowLeftIcon, FaLongArrowAltRight as ArrowRightIcon } from 'react-icons/fa';
 import Arrow from './Arrow';
+import Numbers from './Numbers';
 
 const DEFAULT_ITEMS_PER_PAGE = 12;
 
@@ -30,6 +31,8 @@ const ProductsNavigation: FC<Props> = ({
         disabled={currentPage === 1}
         showIconFirst={true}
       />
+
+      <Numbers currentPage={currentPage} goToPage={goToPage} lastPage={lastPage} />
 
       <Arrow
         text="Next"
