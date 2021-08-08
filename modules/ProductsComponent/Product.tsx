@@ -11,15 +11,15 @@ interface Props {
 const Product: FC<Props> = ({ title, image, description }) => (
   <Box bgColor="white" rounded="lg" boxShadow="md">
     <Stack>
-      <Image src={image} roundedTop="lg" fit="cover" maxHeight={200} />
+      <Image src={image} roundedTop="lg" fit="cover" maxHeight={8 * 25} />
+    </Stack>
 
-      <Stack spacing={4} p={4}>
-        <Text fontSize="lg" fontWeight="bold">
-          {title}
-        </Text>
+    <Stack spacing={4} p={4}>
+      <Text fontSize="lg" fontWeight="bold">
+        {title}
+      </Text>
 
-        <Text>{description}</Text>
-      </Stack>
+      <Text>{description}</Text>
     </Stack>
   </Box>
 );
