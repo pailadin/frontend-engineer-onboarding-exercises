@@ -34,6 +34,7 @@
     "@reduxjs/toolkit": "^1.6.1",
     "change-case": "^4.1.2",
     "framer-motion": "^4.1.17",
+    "memoize-one": "^5.2.1",
     "next": "11.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
