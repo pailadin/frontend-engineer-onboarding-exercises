@@ -21,6 +21,7 @@ const NavigationNumber: FC<Props> = ({ page, currentPage, goToPage }) => {
       borderTopStyle="solid"
       borderTopColor={isCurrentPage ? ACTIVE_COLOR : 'transparent'}
       onClick={onClick}
+      userSelect="none"
       pl={4}
       pr={4}
     >

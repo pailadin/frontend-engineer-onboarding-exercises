@@ -61,7 +61,9 @@ const NavigationNumbers: FC<Props> = ({
           prevPage = page;
           return (
             <Fragment key={page}>
-              <Text alignSelf="center">...</Text>
+              <Text alignSelf="center" userSelect="none">
+                ...
+              </Text>
               <Number page={page} currentPage={currentPage} goToPage={goToPage} />
             </Fragment>
           );
