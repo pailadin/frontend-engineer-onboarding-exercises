@@ -18,8 +18,11 @@ const INITIAL_STATE: Products = {
   status: 'loading',
 };
 
-const getFakeProductData = createAsyncThunk('product/getFakeProductData', async () => {
-  const response = await fetch('/api/fakeProductData');
+const getFakeProductData = createAsyncThunk('product/getFakeProductData', async (data: unknown = {}) => {
+  const response = await fetch('/api/fakeProductData', {
+    method: 'post',
+    body: JSON.stringify(data),
+  });
 
   return response.json();
 });

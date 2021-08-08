@@ -13,7 +13,7 @@ const ProductsComponent: FC = () => {
   const [currentPage, setCurrentPage] = useState(1); // Reminder: starts at ONE
 
   useEffect(() => {
-    void dispatch(getFakeProductData());
+    void dispatch(getFakeProductData({}));
   }, [dispatch]);
 
   const products = useSelector(getProducts);
