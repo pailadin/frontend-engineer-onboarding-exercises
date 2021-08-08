@@ -1,9 +1,9 @@
-import { Box, Center, Divider, Flex, SimpleGrid, Spinner, Text } from '@chakra-ui/react';
+import { Box, Center, Divider, Flex, Spinner, Text } from '@chakra-ui/react';
 import { useAppDispatch as useDispatch } from '@store/hooks';
 import { getFakeProductData, getProductFetchStatus, getProducts } from '@store/productSlice';
 import { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import Product from './Product';
+import ProductList from './ProductList';
 
 const ITEMS_PER_PAGE = 12;
 
@@ -50,24 +50,7 @@ const ProductsComponent: FC = () => {
 
       <Divider mt={4} mb={8} />
 
-      <SimpleGrid
-        m={{
-          base: 0,
-          md: 2,
-          lg: 4,
-        }}
-        columns={{
-          base: 1,
-          md: 2,
-          lg: 3,
-          xl: 4,
-        }}
-        spacing={8}
-      >
-        {productsForThisPage.map((product) => (
-          <Product key={product.id} {...product} />
-        ))}
-      </SimpleGrid>
+      <ProductList products={productsForThisPage} />
 
       <Divider mt={8} />
 
