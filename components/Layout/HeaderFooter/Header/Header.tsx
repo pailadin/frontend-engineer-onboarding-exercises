@@ -1,12 +1,17 @@
 import { Box, Center } from '@chakra-ui/react';
+import { checkIfLoggedIn } from '@store/userSlice';
 import Image from 'next/image';
 import React, { FC } from 'react';
+import { useSelector } from 'react-redux';
 import Container from '../Container';
 import Stack from '../Stack';
-import ButtonLink from './ButtonLink';
+import LoggedIn from './HeaderLoggedIn';
+import LoggedOut from './HeaderLoggedOut';
 import TextLink from './TextLink';
 
 const LayoutHeader: FC = () => {
+  const isLoggedIn = useSelector(checkIfLoggedIn);
+
   return (
     <Container mb="2px">
       <Stack spacing={8}>
@@ -19,13 +24,7 @@ const LayoutHeader: FC = () => {
         <TextLink href="/products">Products</TextLink>
       </Stack>
 
-      <Stack spacing={4}>
-        <ButtonLink href="/login">Log in</ButtonLink>
-
-        <ButtonLink href="/signup" variant="solid" colorScheme="purple">
-          Sign up
-        </ButtonLink>
-      </Stack>
+      <Stack spacing={4}>{isLoggedIn ? <LoggedIn /> : <LoggedOut />}</Stack>
     </Container>
   );
 };
