@@ -44,6 +44,7 @@
     "react-icons": "^4.2.0",
     "react-redux": "^7.2.4",
     "redux-devtools-extension": "^2.13.9",
+    "redux-persist": "^6.0.0",
     "yup": "^0.32.9"
   },
   "devDependencies": {

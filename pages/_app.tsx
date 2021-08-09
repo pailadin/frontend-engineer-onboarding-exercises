@@ -1,9 +1,10 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { ChakraProvider } from '@chakra-ui/react';
-import store from '@store';
+import store, { persistor } from '@store';
 import { AppProps } from 'next/app';
 import { FC } from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const DEFAULT_GRAPHQL_URI = 'https://frontend-engineer-onboarding-api-thxaa.ondigitalocean.app/graphql';
 
@@ -18,11 +19,13 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
 
   return (
     <ReduxProvider store={store}>
-      <ApolloProvider client={client}>
-        <ChakraProvider>
-          <Component {...pageProps} />
-        </ChakraProvider>
-      </ApolloProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <ApolloProvider client={client}>
+          <ChakraProvider>
+            <Component {...pageProps} />
+          </ChakraProvider>
+        </ApolloProvider>
+      </PersistGate>
     </ReduxProvider>
   );
 };
