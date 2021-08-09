@@ -5,7 +5,7 @@ const Home: FC = () => {
   const router = useRouter();
 
   useEffect(() => {
-    void router.push('/login');
+    void router.push('/products');
   }, [router]);
 
   return null;
