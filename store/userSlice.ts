@@ -3,8 +3,6 @@ import type { RootState } from '.';
 
 interface User {
   token: string | null;
-  email?: string;
-  name?: string;
 }
 
 const INITIAL_STATE: User = {
@@ -24,8 +22,14 @@ const userSlice = createSlice({
   name: 'config',
   initialState: INITIAL_STATE,
   reducers: {
+    // Originally stored email and name, but API just has token. Don't use this one...
     setUser(state, action: PayloadAction<User>) {
       state = action.payload;
+    },
+    // ...use this instead:
+    setUserToken(state, action: PayloadAction<string>) {
+      state.token = action.payload;
+      return state;
     },
     clearUser() {
       return INITIAL_STATE;
@@ -33,19 +37,17 @@ const userSlice = createSlice({
   },
   extraReducers: {
     [`${getFakeUserData.fulfilled}`]: (state, action) => {
-      const { token, email, firstName, lastName } = action.payload;
+      const { token } = action.payload;
 
-      return {
-        token,
-        email,
-        name: [firstName, lastName].filter((x) => x).join(' '),
-      };
+      return { token };
     },
   },
 });
 
 export default userSlice.reducer;
-export const { setUser, clearUser } = userSlice.actions;
+export const { setUser, setUserToken, clearUser } = userSlice.actions;
 export { getFakeUserData };
 
 export const getUser = (state: RootState): User => state.user;
+export const getUserToken = (state: RootState): string | null => state.user.token;
+export const checkIfLoggedIn = (state: RootState): boolean => !!state.user.token;
