@@ -22,7 +22,7 @@ const LayoutHeader: FC = () => {
       <Stack spacing={4}>
         <ButtonLink href="/login">Log in</ButtonLink>
 
-        <ButtonLink href="/register" variant="solid" colorScheme="purple">
+        <ButtonLink href="/signup" variant="solid" colorScheme="purple">
           Sign up
         </ButtonLink>
       </Stack>

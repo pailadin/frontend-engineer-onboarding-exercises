@@ -1,11 +1,14 @@
-import Layout from '@components/Layout';
-import Component from '@modules/RegisterComponent';
-import { FC } from 'react';
+import { useRouter } from 'next/router';
+import { FC, useEffect } from 'react';
 
-const RegisterModule: FC = () => (
-  <Layout hideFooter={true}>
-    <Component />
-  </Layout>
-);
+const OldSignupPage: FC = () => {
+  const router = useRouter();
 
-export default RegisterModule;
+  useEffect(() => {
+    void router.push('/signup');
+  }, [router]);
+
+  return null;
+};
+
+export default OldSignupPage;

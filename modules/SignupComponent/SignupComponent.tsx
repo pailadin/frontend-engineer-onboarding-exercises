@@ -1,11 +1,11 @@
 import { useToast } from '@chakra-ui/react';
 import { FormContainer, Item } from '@components/Form';
-import { REGISTER as VALIDATION_SCHEMA } from '@constants/validation/user';
+import { SIGNUP as VALIDATION_SCHEMA } from '@constants/validation/user';
 import { useAppDispatch as useDispatch } from '@store/hooks';
 import { getFakeUserData } from '@store/userSlice';
 import { FC } from 'react';
 
-const RegisterComponent: FC = () => {
+const SignComponent: FC = () => {
   const dispatch = useDispatch();
   const toast = useToast();
 
@@ -51,4 +51,4 @@ const RegisterComponent: FC = () => {
   );
 };
 
-export default RegisterComponent;
+export default SignComponent;

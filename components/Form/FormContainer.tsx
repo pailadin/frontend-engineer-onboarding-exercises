@@ -1,4 +1,4 @@
-// Currently used by the Login and Register modules
+// Currently used by the Login and SignUp modules
 // TODO Ask if this component should even be here, or combine those modules, or something else:
 import { Box, Button, Center } from '@chakra-ui/react';
 import { Container } from '@components/Form';

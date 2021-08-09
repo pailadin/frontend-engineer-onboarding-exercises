@@ -15,4 +15,4 @@ const password2 = yup
 
 export const LOGIN = { email, password };
 
-export const REGISTER = { firstName, lastName, email, password, password2 };
+export const SIGNUP = { firstName, lastName, email, password, password2 };
