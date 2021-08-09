@@ -24,6 +24,7 @@ const SignupComponent: FC = () => {
       const token = data.signUp.token;
 
       dispatch(setUserToken(token));
+      void router.push('/products');
 
       toast({
         title: 'Registered successfully',
