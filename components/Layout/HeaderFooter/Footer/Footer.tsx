@@ -16,7 +16,7 @@ const LayoutFooter: FC = () => {
     <Container>
       <Box>
         <Text color="gray.400" fontSize="sm">
-          @2020 HOV Onboarding, All rights reserved
+          @2021 HOV Onboarding, All rights reserved
         </Text>
       </Box>
 
