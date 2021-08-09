@@ -6,7 +6,7 @@ interface Props {
   [x: string]: unknown;
 }
 
-const INNER_PADDING_HORIZONTAL = {
+const PADDING_HORIZONTAL = {
   base: 2,
   sm: 4,
   md: 12,
@@ -21,8 +21,8 @@ const HeaderFooterContainer: FC<Props> = ({ children, ...rest }) => {
       alignItems="center"
       justifyContent="space-between"
       minHeight={14}
-      pl={INNER_PADDING_HORIZONTAL}
-      pr={INNER_PADDING_HORIZONTAL}
+      pl={PADDING_HORIZONTAL}
+      pr={PADDING_HORIZONTAL}
       {...rest}
     >
       {children}
