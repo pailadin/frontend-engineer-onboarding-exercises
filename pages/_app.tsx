@@ -11,7 +11,7 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
   const authorization = store.getState().user.token || '';
 
   const client = new ApolloClient({
-    uri: process.env.GRAPHQL_URI || DEFAULT_GRAPHQL_URI,
+    uri: process.env.NEXT_PUBLIC_GRAPHQL_URI || DEFAULT_GRAPHQL_URI,
     cache: new InMemoryCache(),
     headers: { authorization },
   });

@@ -14,7 +14,7 @@ const ITEMS_PER_PAGE = 12;
 // Letting myself toggle it on when it might be useful for debugging for now.
 // TODO Remove when no longer useful:
 const USE_FAKE_API_INSTEAD_OF_GRAPHQL =
-  String(process.env.USE_FAKE_API_INSTEAD_OF_GRAPHQL_IN_PRODUCTS).toUpperCase() === 'TRUE';
+  String(process.env.NEXT_PUBLIC_USE_FAKE_API_INSTEAD_OF_GRAPHQL_IN_PRODUCTS).toUpperCase() === 'TRUE';
 
 const ProductsComponent: FC = () => {
   /* eslint-disable @typescript-eslint/no-unnecessary-condition */
@@ -79,7 +79,7 @@ const ProductsComponent: FC = () => {
         <Divider mt={4} mb={8} />
       </Flex>
 
-      <Flex bgColor="pink" flexGrow={1} w="100%" direction="column" alignSelf="center">
+      <Flex flexGrow={1} w="100%" direction="column" alignSelf="center">
         <ProductList products={productsForThisPage} />
       </Flex>
 
