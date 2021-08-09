@@ -8,19 +8,22 @@ import { Provider as ReduxProvider } from 'react-redux';
 const DEFAULT_GRAPHQL_URI = 'https://frontend-engineer-onboarding-api-thxaa.ondigitalocean.app/graphql';
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
+  const authorization = store.getState().user.token || '';
+
   const client = new ApolloClient({
     uri: process.env.GRAPHQL_URI || DEFAULT_GRAPHQL_URI,
     cache: new InMemoryCache(),
+    headers: { authorization },
   });
 
   return (
-    <ApolloProvider client={client}>
-      <ReduxProvider store={store}>
+    <ReduxProvider store={store}>
+      <ApolloProvider client={client}>
         <ChakraProvider>
           <Component {...pageProps} />
         </ChakraProvider>
-      </ReduxProvider>
-    </ApolloProvider>
+      </ApolloProvider>
+    </ReduxProvider>
   );
 };
 
