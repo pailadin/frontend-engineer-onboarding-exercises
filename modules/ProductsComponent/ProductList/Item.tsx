@@ -3,12 +3,12 @@ import { Box, Image, Stack, Text } from '@chakra-ui/react';
 import { FC } from 'react';
 
 interface Props {
-  title: string;
-  image: string;
+  name: string;
+  image?: string;
   description: string;
 }
 
-const Product: FC<Props> = ({ title, image, description }) => (
+const Product: FC<Props> = ({ name, image = '/annie-spratt-QckxruozjRg-unsplash.jpg', description }) => (
   <Box bgColor="white" rounded="lg" boxShadow="md">
     <Stack>
       <Image src={image} roundedTop="lg" fit="cover" maxHeight={8 * 25} />
@@ -16,7 +16,7 @@ const Product: FC<Props> = ({ title, image, description }) => (
 
     <Stack spacing={4} p={4}>
       <Text fontSize="lg" fontWeight="bold">
-        {title}
+        {name}
       </Text>
 
       <Text>{description}</Text>

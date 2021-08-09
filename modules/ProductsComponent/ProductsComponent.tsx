@@ -1,7 +1,9 @@
+import { useQuery } from '@apollo/client';
 import { Box, Center, Divider, Spinner, Text } from '@chakra-ui/react';
-import { useAppDispatch as useDispatch } from '@store/hooks';
-import { getFakeProductData, getProductFetchStatus, getProducts } from '@store/productSlice';
-import { FC, useEffect, useState } from 'react';
+import { GET_PRODUCTS as QUERY } from '@constants/graphql/queries';
+// import { getFakeProductData, getProductFetchStatus, getProducts } from '@store/productSlice';
+import { getUser } from '@store/userSlice';
+import { FC, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Navigation from './Navigation';
 import ProductList from './ProductList';
@@ -9,17 +11,23 @@ import ProductList from './ProductList';
 const ITEMS_PER_PAGE = 12;
 
 const ProductsComponent: FC = () => {
-  const dispatch = useDispatch();
+  const { loading, error, data } = useQuery(QUERY);
+
   const [currentPage, setCurrentPage] = useState(1); // Reminder: starts at ONE
 
-  useEffect(() => {
-    void dispatch(getFakeProductData({}));
-  }, [dispatch]);
+  // Originally missed we had an GraphQL API, ended up making a thing in pages/api.
+  // Leaving a lot of the old code commented out for now just in case I need it for something
+  // TODO Remove them later
+  // useEffect(() => {
+  //   void dispatch(getFakeProductData({}));
+  // }, [dispatch]);
 
-  const products = useSelector(getProducts);
-  const status = useSelector(getProductFetchStatus);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const user = useSelector(getUser);
+  // const products = useSelector(getProducts);
+  // const status = useSelector(getProductFetchStatus);
 
-  if (status === 'loading') {
+  if (loading) {
     return (
       <Center>
         <Spinner thickness="4px" emptyColor="gray.200" color="blue.500" size="xl" />
@@ -27,7 +35,17 @@ const ProductsComponent: FC = () => {
     );
   }
 
-  // TODO Show a toast or something on error
+  // TODO Handle error properly
+  if (error) {
+    return (
+      <Center>
+        <Text>An error occurred</Text>
+      </Center>
+    );
+  }
+
+  const products = data.products.edges.map((edge) => edge.node);
+
   if (products.length <= 0) {
     return (
       <Center>

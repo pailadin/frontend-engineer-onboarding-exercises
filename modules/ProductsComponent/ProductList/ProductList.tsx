@@ -4,8 +4,8 @@ import Item from './Item';
 
 interface Item {
   id: number;
-  title: string;
-  image: string;
+  name: string;
+  image?: string;
   description: string;
 }
 

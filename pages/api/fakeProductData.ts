@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 const PRODUCT = {
   image: '/annie-spratt-QckxruozjRg-unsplash.jpg',
-  title: 'ReactJS',
+  name: 'ReactJS',
   description:
     'Repudiandae sint consequuntur vel. Amet ut nobis explicabo numquam expedita quia omnis voluptatem. Minus quidem ipsam quia iusto.',
 };
