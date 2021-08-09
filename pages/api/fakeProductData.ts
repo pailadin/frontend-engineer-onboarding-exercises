@@ -2,7 +2,7 @@ import { getBodyFromReq } from '@utils/api';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const PRODUCT = {
-  image: '/annie-spratt-QckxruozjRg-unsplash.jpg',
+  image: '/default-product-image.jpg',
   name: 'ReactJS',
   description:
     'Repudiandae sint consequuntur vel. Amet ut nobis explicabo numquam expedita quia omnis voluptatem. Minus quidem ipsam quia iusto.',

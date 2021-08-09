@@ -8,7 +8,7 @@ interface Props {
   description: string;
 }
 
-const Product: FC<Props> = ({ name, image = '/annie-spratt-QckxruozjRg-unsplash.jpg', description }) => (
+const Product: FC<Props> = ({ name, image = '/default-product-image.jpg', description }) => (
   <Box bgColor="white" rounded="lg" boxShadow="md">
     <Stack>
       <Image src={image} roundedTop="lg" fit="cover" maxHeight={8 * 25} />
