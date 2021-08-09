@@ -1,5 +1,6 @@
 // TODO Ask if the <Image/> from next or chakra should be used
 import { Box, Image, Stack, Text } from '@chakra-ui/react';
+import AddToCartButton from '@components/AddToCartButton';
 import { FC } from 'react';
 
 interface Props {
@@ -20,6 +21,10 @@ const Product: FC<Props> = ({ name, image = '/default-product-image.jpg', descri
       </Text>
 
       <Text>{description}</Text>
+    </Stack>
+
+    <Stack p={4}>
+      <AddToCartButton />
     </Stack>
   </Box>
 );

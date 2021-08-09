@@ -13,12 +13,12 @@ const HeaderLoggedIn: FC = () => {
   return (
     <>
       <ItemWrapper>
-        <Icon as={IconNotification} boxSize="1.5em" />
+        <Icon as={IconNotification} w={6} h={6} />
       </ItemWrapper>
 
       <ItemWrapper>
         <Circle>
-          <Image src="/default-profile-image.jpg" rounded="full" maxHeight={12} border="black solid 2px" />
+          <Image src="/default-profile-image.jpg" rounded="full" maxHeight={12} border="2px solid black" />
         </Circle>
       </ItemWrapper>
 
