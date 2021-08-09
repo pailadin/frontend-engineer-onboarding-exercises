@@ -1,7 +1,6 @@
-import { Button, Center, Flex, Text } from '@chakra-ui/react';
-import NextLink from 'next/link';
+import { Button, Text } from '@chakra-ui/react';
 import { FC } from 'react';
-
+import ItemWrapper from '../ItemWrapper';
 interface Props {
   children: string;
   href: string;
@@ -10,15 +9,11 @@ interface Props {
 
 const ButtonLink: FC<Props> = ({ children, href, ...rest }) => {
   return (
-    <Flex>
-      <NextLink href={href}>
-        <Center>
-          <Button variant="outline" {...rest}>
-            <Text fontWeight="bold">{children}</Text>
-          </Button>
-        </Center>
-      </NextLink>
-    </Flex>
+    <ItemWrapper href={href}>
+      <Button variant="outline" {...rest}>
+        <Text fontWeight="bold">{children}</Text>
+      </Button>
+    </ItemWrapper>
   );
 };
 

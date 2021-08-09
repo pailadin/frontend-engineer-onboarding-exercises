@@ -1,8 +1,9 @@
-import { Center, Circle, Flex, Icon, Image } from '@chakra-ui/react';
+import { Circle, Icon, Image } from '@chakra-ui/react';
 import { useAppDispatch as useDispatch } from '@store/hooks';
 import { clearUser } from '@store/userSlice';
 import React, { FC } from 'react';
 import { FaRegBell as IconNotification } from 'react-icons/fa';
+import ItemWrapper from '../ItemWrapper';
 import ButtonLink from './ButtonLink';
 
 const HeaderLoggedIn: FC = () => {
@@ -11,19 +12,15 @@ const HeaderLoggedIn: FC = () => {
 
   return (
     <>
-      <Flex>
-        <Center>
-          <Icon as={IconNotification} boxSize="1.5em" />
-        </Center>
-      </Flex>
+      <ItemWrapper>
+        <Icon as={IconNotification} boxSize="1.5em" />
+      </ItemWrapper>
 
-      <Flex>
-        <Center>
-          <Circle>
-            <Image src="/default-profile-image.jpg" rounded="full" maxHeight={12} border="black solid 2px" />
-          </Circle>
-        </Center>
-      </Flex>
+      <ItemWrapper>
+        <Circle>
+          <Image src="/default-profile-image.jpg" rounded="full" maxHeight={12} border="black solid 2px" />
+        </Circle>
+      </ItemWrapper>
 
       <ButtonLink href="/products" onClick={logout}>
         Logout

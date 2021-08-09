@@ -1,7 +1,7 @@
-import { Center, Flex, Text } from '@chakra-ui/react';
-import NextLink from 'next/link';
+import { Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
+import ItemWrapper from '../ItemWrapper';
 
 interface Props {
   children: string;
@@ -15,20 +15,17 @@ const TextLink: FC<Props> = ({ children, href, ...rest }) => {
   const isCurrentRoute = pathname === href;
 
   return (
-    <Flex
+    <ItemWrapper
       cursor="pointer"
       borderBottomWidth="3px"
       borderBottomStyle="solid"
       borderBottomColor={isCurrentRoute ? 'purple.600' : 'transparent'}
+      href={href}
     >
-      <NextLink href={href}>
-        <Center>
-          <Text fontWeight={isCurrentRoute ? 'bold' : 'normal'} {...rest}>
-            {children}
-          </Text>
-        </Center>
-      </NextLink>
-    </Flex>
+      <Text fontWeight={isCurrentRoute ? 'bold' : 'normal'} {...rest}>
+        {children}
+      </Text>
+    </ItemWrapper>
   );
 };
 
