@@ -1,31 +1,41 @@
 import { useQuery } from '@apollo/client';
-import { Box, Center, Divider, Spinner, Text } from '@chakra-ui/react';
+import { Center, Divider, Flex, Spinner, Text } from '@chakra-ui/react';
 import { GET_PRODUCTS as QUERY } from '@constants/graphql/queries';
-// import { getFakeProductData, getProductFetchStatus, getProducts } from '@store/productSlice';
-import { getUser } from '@store/userSlice';
-import { FC, useState } from 'react';
+import { useAppDispatch as useDispatch } from '@store/hooks';
+import { getFakeProductData, getProductFetchStatus, getProducts } from '@store/productSlice';
+import { checkIfLoggedIn } from '@store/userSlice';
+import { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Navigation from './Navigation';
 import ProductList from './ProductList';
 
 const ITEMS_PER_PAGE = 12;
+// Originally missed we had an GraphQL API, ended up making a thing in pages/api.
+// Letting myself toggle it on when it might be useful for debugging for now.
+// TODO Remove when no longer useful:
+const USE_FAKE_API_INSTEAD_OF_GRAPHQL =
+  String(process.env.USE_FAKE_API_INSTEAD_OF_GRAPHQL_IN_PRODUCTS).toUpperCase() === 'TRUE';
 
 const ProductsComponent: FC = () => {
-  const { loading, error, data } = useQuery(QUERY);
+  /* eslint-disable @typescript-eslint/no-unnecessary-condition */
+  const dispatch = useDispatch();
+  const { loading: loadingFlagFromGraphQL, error, data } = useQuery(QUERY);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const isLoggedIn = useSelector(checkIfLoggedIn);
+  const status = useSelector(getProductFetchStatus);
+  const loadingFlagFromRedux = status === 'loading';
+  const productsFromRedux = useSelector(getProducts);
+
+  const loading = USE_FAKE_API_INSTEAD_OF_GRAPHQL ? loadingFlagFromRedux : loadingFlagFromGraphQL;
 
   const [currentPage, setCurrentPage] = useState(1); // Reminder: starts at ONE
 
-  // Originally missed we had an GraphQL API, ended up making a thing in pages/api.
-  // Leaving a lot of the old code commented out for now just in case I need it for something
-  // TODO Remove them later
-  // useEffect(() => {
-  //   void dispatch(getFakeProductData({}));
-  // }, [dispatch]);
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const user = useSelector(getUser);
-  // const products = useSelector(getProducts);
-  // const status = useSelector(getProductFetchStatus);
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    if (USE_FAKE_API_INSTEAD_OF_GRAPHQL) {
+      void dispatch(getFakeProductData({}));
+    }
+  }, [dispatch]);
 
   if (loading) {
     return (
@@ -35,21 +45,15 @@ const ProductsComponent: FC = () => {
     );
   }
 
+  const products = USE_FAKE_API_INSTEAD_OF_GRAPHQL ? productsFromRedux : data.products.edges.map((edge) => edge.node);
+
+  /* eslint-enable @typescript-eslint/no-unnecessary-condition */
+
   // TODO Handle error properly
   if (error) {
     return (
       <Center>
         <Text>An error occurred</Text>
-      </Center>
-    );
-  }
-
-  const products = data.products.edges.map((edge) => edge.node);
-
-  if (products.length <= 0) {
-    return (
-      <Center>
-        <Text>No items found</Text>
       </Center>
     );
   }
@@ -66,19 +70,24 @@ const ProductsComponent: FC = () => {
   const productsForThisPage = products.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
   return (
-    <Box mt={20} mb={8}>
-      <Text fontSize="3xl" fontWeight="bold">
-        Products
-      </Text>
+    <Flex mt={20} mb={8} w="100%" direction="column">
+      <Flex width="100%" direction="column">
+        <Text fontSize="3xl" fontWeight="bold">
+          Products
+        </Text>
 
-      <Divider mt={4} mb={8} />
+        <Divider mt={4} mb={8} />
+      </Flex>
 
-      <ProductList products={productsForThisPage} />
+      <Flex bgColor="pink" flexGrow={1} w="100%" direction="column" alignSelf="center">
+        <ProductList products={productsForThisPage} />
+      </Flex>
 
-      <Divider mt={8} />
-
-      <Navigation currentPage={currentPage} goToPage={goToPage} numberOfProducts={numberOfProducts} />
-    </Box>
+      <Flex width="100%" direction="column">
+        <Divider mt={8} />
+        <Navigation currentPage={currentPage} goToPage={goToPage} numberOfProducts={numberOfProducts} />
+      </Flex>
+    </Flex>
   );
 };
 
