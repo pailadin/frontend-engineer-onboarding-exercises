@@ -1,11 +1,12 @@
 import { useQuery } from '@apollo/client';
-import { Flex, Image, Stack, Text, useToast } from '@chakra-ui/react';
+import { Flex, HStack, Icon, IconButton, Image, Text, useToast } from '@chakra-ui/react';
 import AddToCartButton from '@components/AddToCartButton';
 import Loading from '@components/Loading';
 import Redirect from '@components/Redirect';
 import { DEFAULT_PRODUCT_IMAGE } from '@constants/etc';
 import { GET_PRODUCTS as QUERY } from '@constants/graphql/queries';
 import { FC, useEffect } from 'react';
+import { FaEdit as IconEdit, FaTrashAlt as IconDelete } from 'react-icons/fa';
 import Breadcrumbs from './Breadcrumbs';
 
 interface Props {
@@ -79,14 +80,22 @@ const Product: FC<Props> = ({ id }) => {
           <AddToCartButton mt={6} />
         </Flex>
 
-        <Flex>
-          <Stack flexGrow={1} spacing={4} pl={4}>
+        <Flex pl={4} flexGrow={1} flexDirection="column">
+          <Flex justifyContent="space-between">
             <Text fontSize="3xl" fontWeight="bold" isTruncated>
               {product.name}
             </Text>
 
+            <HStack spacing={2}>
+              <IconButton colorScheme="gray" icon={<Icon as={IconEdit} h={3} w={3} />} aria-label="Edit Button" />
+
+              <IconButton colorScheme="gray" icon={<Icon as={IconDelete} h={3} w={3} />} aria-label="Delete Button" />
+            </HStack>
+          </Flex>
+
+          <Flex mt={4}>
             <Text>{product.description}</Text>
-          </Stack>
+          </Flex>
         </Flex>
       </Flex>
     </Flex>
