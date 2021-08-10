@@ -1,14 +1,6 @@
-import { useRouter } from 'next/router';
-import { FC, useEffect } from 'react';
+import Redirect from '@components/Redirect';
+import { FC } from 'react';
 
-const OldSignupPage: FC = () => {
-  const router = useRouter();
-
-  useEffect(() => {
-    void router.push('/signup');
-  }, [router]);
-
-  return null;
-};
+const OldSignupPage: FC = () => <Redirect url="/signup" />;
 
 export default OldSignupPage;

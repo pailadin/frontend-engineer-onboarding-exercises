@@ -1,14 +1,6 @@
-import { useRouter } from 'next/router';
-import { FC, useEffect } from 'react';
+import Redirect from '@components/Redirect';
+import { FC } from 'react';
 
-const Home: FC = () => {
-  const router = useRouter();
-
-  useEffect(() => {
-    void router.push('/products');
-  }, [router]);
-
-  return null;
-};
+const Home: FC = () => <Redirect />;
 
 export default Home;
