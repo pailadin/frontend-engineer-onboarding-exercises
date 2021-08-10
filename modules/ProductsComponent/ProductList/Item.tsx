@@ -1,15 +1,26 @@
 // TODO Ask if the <Image/> from next or chakra should be used
 import { Flex, Image, Stack, Text } from '@chakra-ui/react';
 import AddToCartButton from '@components/AddToCartButton';
+import { useRouter } from 'next/router';
 import { FC } from 'react';
 
 interface Props {
+  id: string | number;
   name: string;
   image?: string;
   description: string;
 }
 
-const Product: FC<Props> = ({ name, image = '/default-product-image.jpg', description }) => {
+const Product: FC<Props> = ({ id, name, image = '/default-product-image.jpg', description }) => {
+  const router = useRouter();
+
+  const onClick = (): void => {
+    void router.push({
+      pathname: 'product/[id]',
+      query: { id },
+    });
+  };
+
   return (
     <Flex
       direction="column"
@@ -22,6 +33,7 @@ const Product: FC<Props> = ({ name, image = '/default-product-image.jpg', descri
       bgColor="white"
       rounded="lg"
       boxShadow="md"
+      onClick={onClick}
       cursor="pointer"
     >
       <Stack>

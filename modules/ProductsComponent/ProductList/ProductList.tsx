@@ -3,7 +3,7 @@ import { FC } from 'react';
 import Item from './Item';
 
 interface Item {
-  id: number;
+  id: string | number;
   name: string;
   image?: string;
   description: string;
