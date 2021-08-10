@@ -9,12 +9,16 @@ import { PersistGate } from 'redux-persist/integration/react';
 const DEFAULT_GRAPHQL_URI = 'https://frontend-engineer-onboarding-api-thxaa.ondigitalocean.app/graphql';
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
-  const authorization = store.getState().user.token || '';
+  const headers: Record<string, string> = {};
+  const token = store.getState().user.token;
+  if (token) {
+    headers.authorization = `Bearer ${token}`;
+  }
 
   const client = new ApolloClient({
     uri: process.env.NEXT_PUBLIC_GRAPHQL_URI || DEFAULT_GRAPHQL_URI,
     cache: new InMemoryCache(),
-    headers: { authorization },
+    headers,
   });
 
   return (
