@@ -1,3 +1,4 @@
+import { Box } from '@chakra-ui/react';
 import { checkIfLoggedIn } from '@store/userSlice';
 import Image from 'next/image';
 import React, { FC } from 'react';
@@ -14,15 +15,19 @@ const LayoutHeader: FC = () => {
 
   return (
     <Container mb="2px">
-      <Stack spacing={8}>
-        <ItemWrapper display={{ base: 'none', md: 'flex' }}>
-          <Image src="/workflow-logo.png" height="30px" width="128px" />
-        </ItemWrapper>
+      <Box>
+        <Stack spacing={8}>
+          <ItemWrapper display={{ base: 'none', md: 'flex' }}>
+            <Image src="/workflow-logo.png" height="30px" width="128px" />
+          </ItemWrapper>
 
-        <TextLink href="/products">Products</TextLink>
-      </Stack>
+          <TextLink href="/products">Products</TextLink>
+        </Stack>
+      </Box>
 
-      <Stack spacing={4}>{isLoggedIn ? <LoggedIn /> : <LoggedOut />}</Stack>
+      <Box>
+        <Stack spacing={4}>{isLoggedIn ? <LoggedIn /> : <LoggedOut />}</Stack>
+      </Box>
     </Container>
   );
 };
