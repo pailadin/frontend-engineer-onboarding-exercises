@@ -6,6 +6,7 @@ import Redirect from '@components/Redirect';
 import { DEFAULT_PRODUCT_IMAGE } from '@constants/etc';
 import { GET_PRODUCTS as QUERY } from '@constants/graphql/queries';
 import { FC, useEffect } from 'react';
+import Breadcrumbs from './Breadcrumbs';
 
 interface Props {
   id: string | number;
@@ -46,6 +47,7 @@ const Product: FC<Props> = ({ id }) => {
   return (
     <Flex
       width="100%"
+      direction="column"
       mt={{
         base: 0,
         sm: 8,
@@ -53,6 +55,10 @@ const Product: FC<Props> = ({ id }) => {
         lg: 24,
       }}
     >
+      <Flex mb={6}>
+        <Breadcrumbs strings={['Products', product.name]} />
+      </Flex>
+
       <Flex flexGrow={1}>
         <Flex flexDirection="column">
           <Image
