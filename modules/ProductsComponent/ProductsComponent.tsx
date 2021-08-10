@@ -1,9 +1,9 @@
 import { useQuery } from '@apollo/client';
-import { Center, Divider, Flex, Spinner, Text } from '@chakra-ui/react';
+import { Center, Divider, Flex, Text } from '@chakra-ui/react';
+import Loading from '@components/Loading';
 import { GET_PRODUCTS as QUERY } from '@constants/graphql/queries';
 import { useAppDispatch as useDispatch } from '@store/hooks';
 import { getFakeProductData, getProductFetchStatus, getProducts } from '@store/productSlice';
-import { checkIfLoggedIn } from '@store/userSlice';
 import { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Navigation from './Navigation';
@@ -20,8 +20,6 @@ const ProductsComponent: FC = () => {
   /* eslint-disable @typescript-eslint/no-unnecessary-condition */
   const dispatch = useDispatch();
   const { loading: loadingFlagFromGraphQL, error, data } = useQuery(QUERY);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const isLoggedIn = useSelector(checkIfLoggedIn);
   const status = useSelector(getProductFetchStatus);
   const loadingFlagFromRedux = status === 'loading';
   const productsFromRedux = useSelector(getProducts);
@@ -38,11 +36,7 @@ const ProductsComponent: FC = () => {
   }, [dispatch]);
 
   if (loading) {
-    return (
-      <Center>
-        <Spinner thickness="4px" emptyColor="gray.200" color="blue.500" size="xl" />
-      </Center>
-    );
+    return <Loading />;
   }
 
   const products = USE_FAKE_API_INSTEAD_OF_GRAPHQL ? productsFromRedux : data.products.edges.map((edge) => edge.node);
