@@ -1,6 +1,7 @@
 // TODO Ask if the <Image/> from next or chakra should be used
 import { Flex, Image, Stack, Text } from '@chakra-ui/react';
 import AddToCartButton from '@components/AddToCartButton';
+import { DEFAULT_PRODUCT_IMAGE } from '@constants/etc';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
 
@@ -11,7 +12,7 @@ interface Props {
   description: string;
 }
 
-const Product: FC<Props> = ({ id, name, image = '/default-product-image.jpg', description }) => {
+const Product: FC<Props> = ({ id, name, image = DEFAULT_PRODUCT_IMAGE, description }) => {
   const router = useRouter();
 
   const onClick = (): void => {
