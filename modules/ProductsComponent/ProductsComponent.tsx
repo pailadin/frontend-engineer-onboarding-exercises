@@ -1,9 +1,10 @@
 import { useQuery } from '@apollo/client';
 import { Center, Divider, Flex, Text } from '@chakra-ui/react';
 import Loading from '@components/Loading';
-import { GET_PRODUCTS as QUERY } from '@constants/graphql/queries';
+import { GET_PRODUCTS, GET_PRODUCTS_AND_USER } from '@constants/graphql/queries';
 import { useAppDispatch as useDispatch } from '@store/hooks';
 import { getFakeProductData, getProductFetchStatus, getProducts } from '@store/productSlice';
+import { checkIfLoggedIn } from '@store/userSlice';
 import { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Navigation from './Navigation';
@@ -17,9 +18,10 @@ const USE_FAKE_API_INSTEAD_OF_GRAPHQL =
   String(process.env.NEXT_PUBLIC_USE_FAKE_API_INSTEAD_OF_GRAPHQL_IN_PRODUCTS).toUpperCase() === 'TRUE';
 
 const ProductsComponent: FC = () => {
-  /* eslint-disable @typescript-eslint/no-unnecessary-condition */
   const dispatch = useDispatch();
-  const { loading: loadingFlagFromGraphQL, error, data } = useQuery(QUERY);
+  const isLoggedIn = useSelector(checkIfLoggedIn);
+
+  const { loading: loadingFlagFromGraphQL, error, data } = useQuery(isLoggedIn ? GET_PRODUCTS_AND_USER : GET_PRODUCTS);
   const status = useSelector(getProductFetchStatus);
   const loadingFlagFromRedux = status === 'loading';
   const productsFromRedux = useSelector(getProducts);
@@ -40,6 +42,7 @@ const ProductsComponent: FC = () => {
   }
 
   const products = USE_FAKE_API_INSTEAD_OF_GRAPHQL ? productsFromRedux : data.products.edges.map((edge) => edge.node);
+  const userId = (isLoggedIn && data?.me?.id) || null;
 
   /* eslint-enable @typescript-eslint/no-unnecessary-condition */
 
@@ -74,7 +77,7 @@ const ProductsComponent: FC = () => {
       </Flex>
 
       <Flex flexGrow={1} w="100%" direction="column" alignSelf="center">
-        <ProductList products={productsForThisPage} />
+        <ProductList products={productsForThisPage} currentUserId={userId} />
       </Flex>
 
       <Flex width="100%" direction="column">

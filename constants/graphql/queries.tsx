@@ -1,6 +1,38 @@
 import { gql } from '@apollo/client';
 
+const PRODUCT_FRAGMENT = gql`
+  fragment ProductFields on ProductConnection {
+    edges {
+      node {
+        id
+        name
+        description
+        owner {
+          id
+          firstname
+          lastname
+          emailAddress
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+
+export const GET_CURRENT_USER = gql`
+  query currentUser {
+    me {
+      id
+    }
+  }
+`;
+
 export const GET_PRODUCTS = gql`
+  ${PRODUCT_FRAGMENT}
+
   query products(
     $first: Int
     $after: Binary
@@ -10,23 +42,27 @@ export const GET_PRODUCTS = gql`
     $sort: ProductSortInput
   ) {
     products(first: $first, after: $after, last: $last, before: $before, filter: $filter, sort: $sort) {
-      edges {
-        node {
-          id
-          name
-          description
-          owner {
-            id
-            firstname
-            lastname
-            emailAddress
-            createdAt
-            updatedAt
-          }
-          createdAt
-          updatedAt
-        }
-      }
+      ...ProductFields
+    }
+  }
+`;
+
+export const GET_PRODUCTS_AND_USER = gql`
+  ${PRODUCT_FRAGMENT}
+
+  query products(
+    $first: Int
+    $after: Binary
+    $last: Int
+    $before: Binary
+    $filter: ProductsFilter
+    $sort: ProductSortInput
+  ) {
+    me {
+      id
+    }
+    products(first: $first, after: $after, last: $last, before: $before, filter: $filter, sort: $sort) {
+      ...ProductFields
     }
   }
 `;

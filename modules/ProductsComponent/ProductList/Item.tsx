@@ -10,10 +10,15 @@ interface Props {
   name: string;
   image?: string;
   description: string;
+  currentUserId?: string | null;
+  ownerUserId?: string | null;
 }
 
-const Product: FC<Props> = ({ id, name, image = DEFAULT_PRODUCT_IMAGE, description }) => {
+const Product: FC<Props> = ({ id, name, image = DEFAULT_PRODUCT_IMAGE, description, currentUserId, ownerUserId }) => {
   const router = useRouter();
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const isCurrentUserOwner = currentUserId === ownerUserId;
 
   const onClick = (): void => {
     void router.push({

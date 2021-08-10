@@ -2,18 +2,23 @@ import { Center, SimpleGrid, Text } from '@chakra-ui/react';
 import { FC } from 'react';
 import Item from './Item';
 
+interface Owner {
+  id: string;
+}
 interface Item {
   id: string | number;
   name: string;
   image?: string;
   description: string;
+  owner: Owner;
 }
 
 interface Props {
   products: Array<Item>;
+  currentUserId?: string | null;
 }
 
-const ProductList: FC<Props> = ({ products }) => {
+const ProductList: FC<Props> = ({ products, currentUserId }) => {
   if (products.length <= 0) {
     return (
       <Center flexGrow={1}>
@@ -38,7 +43,7 @@ const ProductList: FC<Props> = ({ products }) => {
       spacing={8}
     >
       {products.map((product) => (
-        <Item key={product.id} {...product} />
+        <Item key={product.id} currentUserId={currentUserId} ownerUserId={product.owner.id} {...product} />
       ))}
     </SimpleGrid>
   );
