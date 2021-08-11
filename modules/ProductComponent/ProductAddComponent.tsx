@@ -3,7 +3,6 @@ import { Button, Flex, Stack, Text, useToast } from '@chakra-ui/react';
 import FileUploadBox from '@components/FileUploadBox';
 import { Item } from '@components/Form';
 import Loading from '@components/Loading';
-import ProductContainer from '@components/ProductContainer';
 import Redirect from '@components/Redirect';
 import { PRODUCT_ADD } from '@constants/graphql/mutations';
 import { GET_CURRENT_USER } from '@constants/graphql/queries';
@@ -15,6 +14,7 @@ import { FC, useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import * as yup from 'yup';
+import Container from './Container';
 
 const ProductAdd: FC = () => {
   const router = useRouter();
@@ -83,7 +83,7 @@ const ProductAdd: FC = () => {
     formMethods.formState.isSubmitting || !formMethods.formState.isDirty || !formMethods.formState.isValid;
 
   return (
-    <ProductContainer
+    <Container
       breadcrumbs={'Add product'}
       renderLeft={
         <Flex p={4} flex={1} direction="column">
@@ -112,7 +112,7 @@ const ProductAdd: FC = () => {
           </Stack>
         </Flex>
       </FormProvider>
-    </ProductContainer>
+    </Container>
   );
 };
 

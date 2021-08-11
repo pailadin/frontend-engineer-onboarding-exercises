@@ -2,13 +2,12 @@ import { useQuery } from '@apollo/client';
 import { Flex, HStack, Icon, IconButton, Image, Text, useToast } from '@chakra-ui/react';
 import AddToCartButton from '@components/AddToCartButton';
 import Loading from '@components/Loading';
-import ProductContainer from '@components/ProductContainer';
 import Redirect from '@components/Redirect';
 import { DEFAULT_PRODUCT_IMAGE } from '@constants/etc';
 import { GET_PRODUCTS as QUERY } from '@constants/graphql/queries';
 import { FC, useEffect } from 'react';
 import { FaEdit as IconEdit, FaTrashAlt as IconDelete } from 'react-icons/fa';
-
+import Container from './Container';
 interface Props {
   id: string | number;
 }
@@ -46,7 +45,7 @@ const Product: FC<Props> = ({ id }) => {
   if (loading) return <Loading />;
 
   return (
-    <ProductContainer
+    <Container
       bgColor="inherit"
       breadcrumbs={product.name}
       renderLeft={
@@ -78,7 +77,7 @@ const Product: FC<Props> = ({ id }) => {
       <Flex mt={4}>
         <Text>{product.description}</Text>
       </Flex>
-    </ProductContainer>
+    </Container>
   );
 };
 
