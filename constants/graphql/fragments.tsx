@@ -23,9 +23,16 @@ export const PRODUCT_CONNECTION_FRAGMENT = gql`
 
   fragment ProductConnectionFields on ProductConnection {
     edges {
+      cursor
       node {
         ...ProductFields
       }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
     }
   }
 `;
