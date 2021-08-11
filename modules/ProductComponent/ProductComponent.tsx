@@ -4,11 +4,14 @@ import AddToCartButton from '@components/AddToCartButton';
 import Loading from '@components/Loading';
 import Redirect from '@components/Redirect';
 import { DEFAULT_PRODUCT_IMAGE } from '@constants/etc';
-import { GET_PRODUCTS } from '@constants/graphql/queries';
+import { GET_PRODUCTS, GET_PRODUCTS_AND_USER } from '@constants/graphql/queries';
+import { checkIfLoggedIn } from '@store/userSlice';
 import Link from 'next/link';
 import { FC, useEffect } from 'react';
-import { FaEdit as IconEdit, FaTrashAlt as IconDelete } from 'react-icons/fa';
+import { FaEdit as IconEdit } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 import Container from './Container';
+import DeleteIconButton from './DeleteIconButton';
 
 interface Props {
   id: string | number;
@@ -16,8 +19,9 @@ interface Props {
 
 const Product: FC<Props> = ({ id }) => {
   const toast = useToast();
+  const isLoggedIn = useSelector(checkIfLoggedIn);
 
-  const { loading, error, data } = useQuery(GET_PRODUCTS, {
+  const { loading, error, data } = useQuery(isLoggedIn ? GET_PRODUCTS_AND_USER : GET_PRODUCTS, {
     variables: {
       filter: {
         id: {
@@ -27,7 +31,10 @@ const Product: FC<Props> = ({ id }) => {
     },
   });
 
+  const userId = data?.me?.id || null;
   const product = data?.products?.edges?.[0]?.node;
+  const ownerUserId = product?.owner?.id;
+  const isCurrentUserOwner = userId === ownerUserId; // afaik, no way to just do this in filter
   const shouldShowError = !loading && (error || !product);
 
   useEffect(() => {
@@ -69,13 +76,15 @@ const Product: FC<Props> = ({ id }) => {
           {product.name}
         </Text>
 
-        <HStack spacing={2}>
-          <Link href={`/product/edit/${id}`}>
-            <IconButton colorScheme="gray" icon={<Icon as={IconEdit} h={3} w={3} />} aria-label="Edit Button" />
-          </Link>
+        {isCurrentUserOwner && (
+          <HStack spacing={2}>
+            <Link href={`/product/edit/${id}`}>
+              <IconButton colorScheme="gray" icon={<Icon as={IconEdit} h={3} w={3} />} aria-label="Edit Button" />
+            </Link>
 
-          <IconButton colorScheme="gray" icon={<Icon as={IconDelete} h={3} w={3} />} aria-label="Delete Button" />
-        </HStack>
+            <DeleteIconButton id={product.id} />
+          </HStack>
+        )}
       </Flex>
 
       <Flex mt={4}>

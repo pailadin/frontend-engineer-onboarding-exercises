@@ -33,7 +33,7 @@ const ProductEdit: FC<Props> = ({ id }) => {
   const userId = data?.me?.id || null;
   const product = data?.products?.edges?.[0]?.node;
   const ownerUserId = product?.owner?.id;
-  const isCurrentUserOwner = userId === ownerUserId; // afaik, no way to just do this in filter
+  const isCurrentUserOwner = userId === ownerUserId;
 
   const shouldShowError = !isLoggedIn || (!loading && (error || !userId || !isCurrentUserOwner));
 

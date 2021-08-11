@@ -6,9 +6,16 @@ interface Props {
   children?: ReactElement | null;
   method?: string;
   extraActions?: () => unknown;
+  dontActuallyRedirect?: boolean; // sometimes useful while debugging
 }
 
-const Redirect: FC<Props> = ({ url = '/products', children = null, method = 'push', extraActions }) => {
+const Redirect: FC<Props> = ({
+  url = '/products',
+  children = null,
+  method = 'push',
+  extraActions,
+  dontActuallyRedirect = false,
+}) => {
   const router = useRouter();
 
   useEffect(() => {
@@ -16,7 +23,9 @@ const Redirect: FC<Props> = ({ url = '/products', children = null, method = 'pus
       extraActions();
     }
 
-    void router[method](url);
+    if (!dontActuallyRedirect) {
+      void router[method](url);
+    }
   });
 
   return children;

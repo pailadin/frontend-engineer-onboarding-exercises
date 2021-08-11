@@ -36,3 +36,9 @@ export const PRODUCT_EDIT = gql`
     }
   }
 `;
+
+export const PRODUCT_DELETE = gql`
+  mutation deleteProduct($input: DeleteProductInput!) {
+    deleteProduct(input: $input)
+  }
+`;
