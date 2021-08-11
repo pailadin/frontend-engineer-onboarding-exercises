@@ -1,22 +1,14 @@
 import { Button } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { FC } from 'react';
 import { FaPlus as IconAdd } from 'react-icons/fa';
 
-const AddProductButton: FC = () => {
-  const router = useRouter();
-
-  const onClick = (): void => {
-    void router.push({
-      pathname: 'product/add',
-    });
-  };
-
-  return (
-    <Button onClick={onClick} leftIcon={<IconAdd />} colorScheme="purple">
+const AddProductButton: FC = () => (
+  <Link href="/product/add">
+    <Button leftIcon={<IconAdd />} colorScheme="purple">
       Add Product
     </Button>
-  );
-};
+  </Link>
+);
 
 export default AddProductButton;

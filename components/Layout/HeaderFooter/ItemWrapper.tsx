@@ -1,5 +1,5 @@
 import { Center, Flex } from '@chakra-ui/react';
-import NextLink from 'next/link';
+import Link from 'next/link';
 import { FC, ReactNode } from 'react';
 
 interface Props {
@@ -12,9 +12,9 @@ const ItemWrapper: FC<Props> = ({ href, children, ...rest }) => {
   if (href) {
     return (
       <Flex {...rest}>
-        <NextLink href={href}>
+        <Link href={href}>
           <Center>{children}</Center>
-        </NextLink>
+        </Link>
       </Flex>
     );
   }
