@@ -1,7 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { Flex, Text, useToast } from '@chakra-ui/react';
-import FileUploadBox from '@components/FileUploadBox';
-import { Item } from '@components/Form';
+import { useToast } from '@chakra-ui/react';
 import Loading from '@components/Loading';
 import Redirect from '@components/Redirect';
 import { PRODUCT_ADD } from '@constants/graphql/mutations';
@@ -43,18 +41,7 @@ const ProductAdd: FC = () => {
       successDescription="Redirecting to your new product..."
       validationSchema={VALIDATION_SCHEMA}
       breadcrumbs="Add product"
-      renderLeft={
-        <Flex p={4} flex={1} direction="column">
-          <Text mb={4}>Photo</Text>
-
-          <FileUploadBox />
-        </Flex>
-      }
-    >
-      <Item name="name" label="Title" />
-
-      <Item name="description" multiline={true} />
-    </ProductAddEdit>
+    />
   );
 };
 

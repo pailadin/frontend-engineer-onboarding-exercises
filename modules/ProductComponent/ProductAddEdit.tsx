@@ -1,32 +1,30 @@
 import { DocumentNode, useMutation } from '@apollo/client';
-import { Button, Flex, Stack, useToast } from '@chakra-ui/react';
+import { Button, Flex, Stack, Text, useToast } from '@chakra-ui/react';
+import { Item } from '@components/Form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/router';
-import { FC, ReactNode } from 'react';
+import { FC } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { ObjectShape } from 'yup/lib/object';
 import Container from './Container';
+import FileUploadBox from './FileUploadBox';
 
 interface Props {
-  children: ReactNode;
   mutation: DocumentNode;
   dataPath: string;
   successTitleSuffix: string;
-  successDescription: string;
   validationSchema: ObjectShape;
-  breadcrumbs: string;
+  breadcrumbs: string | Array<string>;
   mapFormInputToGraphQL?: () => Record<string, unknown>;
-  renderLeft?: ReactNode;
+  successDescription?: string;
   cancelUrl?: string;
 }
 
 const ProductAddEdit: FC<Props> = ({
-  children,
   mutation,
   dataPath,
   successTitleSuffix,
-  successDescription,
   validationSchema,
   breadcrumbs,
   mapFormInputToGraphQL = (input: Record<string, unknown>): Record<string, unknown> => {
@@ -35,7 +33,7 @@ const ProductAddEdit: FC<Props> = ({
       description: input.description,
     };
   },
-  renderLeft,
+  successDescription,
   cancelUrl,
 }) => {
   const router = useRouter();
@@ -88,11 +86,22 @@ const ProductAddEdit: FC<Props> = ({
     formMethods.formState.isSubmitting || !formMethods.formState.isDirty || !formMethods.formState.isValid;
 
   return (
-    <Container breadcrumbs={breadcrumbs} renderLeft={renderLeft}>
+    <Container
+      breadcrumbs={breadcrumbs}
+      renderLeft={
+        <Flex p={4} flex={1} direction="column">
+          <Text mb={4}>Photo</Text>
+
+          <FileUploadBox />
+        </Flex>
+      }
+    >
       <FormProvider {...formMethods}>
         <Flex flex={1} as={'form'} onSubmit={formMethods.handleSubmit(onSubmit)}>
           <Stack p={4} spacing={6} flex={1}>
-            {children}
+            <Item name="name" label="Title" />
+
+            <Item name="description" multiline={true} />
 
             <Stack direction="row" spacing={4}>
               <Button type="submit" colorScheme="purple" disabled={submitDisabled}>
