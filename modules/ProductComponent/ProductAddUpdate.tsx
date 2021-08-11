@@ -1,14 +1,9 @@
-import { DocumentNode, useMutation, useQuery } from '@apollo/client';
+import { DocumentNode, useMutation } from '@apollo/client';
 import { Button, Flex, Stack, useToast } from '@chakra-ui/react';
-import Loading from '@components/Loading';
-import Redirect from '@components/Redirect';
-import { GET_CURRENT_USER } from '@constants/graphql/queries';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { checkIfLoggedIn } from '@store/userSlice';
 import { useRouter } from 'next/router';
-import { FC, ReactNode, useEffect } from 'react';
+import { FC, ReactNode } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
 import * as yup from 'yup';
 import { ObjectShape } from 'yup/lib/object';
 import Container from './Container';
@@ -45,9 +40,7 @@ const ProductAddUpdate: FC<Props> = ({
 }) => {
   const router = useRouter();
   const toast = useToast();
-  const isLoggedIn = useSelector(checkIfLoggedIn);
 
-  const { loading, error, data } = useQuery(GET_CURRENT_USER, { skip: !isLoggedIn });
   const [mutate] = useMutation(mutation, {
     onCompleted: (data) => {
       const { id, name } = data[dataPath];
@@ -75,23 +68,6 @@ const ProductAddUpdate: FC<Props> = ({
     mode: 'all',
     resolver: yupResolver(yup.object().shape(validationSchema)),
   });
-
-  const userId = data?.me?.id || null;
-  const shouldShowError = !isLoggedIn || (!loading && (error || !userId));
-
-  useEffect(() => {
-    if (shouldShowError) {
-      toast({
-        title: 'Error!',
-        description: 'You are not authorized to do this action',
-        status: 'error',
-        isClosable: true,
-      });
-    }
-  }, [shouldShowError, toast]);
-
-  if (shouldShowError) return <Redirect />;
-  if (loading) return <Loading />;
 
   const onSubmit = (input: Record<string, unknown>): Promise<unknown> =>
     mutate({
