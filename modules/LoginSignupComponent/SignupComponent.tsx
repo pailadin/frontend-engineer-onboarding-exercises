@@ -1,16 +1,16 @@
 import { useMutation } from '@apollo/client';
 import { useToast } from '@chakra-ui/react';
-import { FormContainer, Item } from '@components/Form';
-import { LOGIN as MUTATION } from '@constants/graphql/mutations';
-import { LOGIN as VALIDATION_SCHEMA } from '@constants/validation/user';
+import { Item } from '@components/Form';
+import { SIGNUP as MUTATION } from '@constants/graphql/mutations';
+import { SIGNUP as VALIDATION_SCHEMA } from '@constants/validation/user';
 import { useAppDispatch as useDispatch } from '@store/hooks';
 import { checkIfLoggedIn, setUserToken } from '@store/userSlice';
 import { useRouter } from 'next/router';
 import { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import ForgotPassword from './ForgotPassword';
+import FormContainer from './FormContainer';
 
-const LoginComponent: FC = () => {
+const SignupComponent: FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const toast = useToast();
@@ -22,13 +22,13 @@ const LoginComponent: FC = () => {
 
   const [mutate] = useMutation(MUTATION, {
     onCompleted: (data) => {
-      const token = data.authenticate.token;
+      const token = data.signUp.token;
 
       dispatch(setUserToken(token));
       void router.push('/products');
 
       toast({
-        title: 'Logged in!',
+        title: 'Registered successfully',
         description: 'Redirecting to products page...',
         status: 'success',
         isClosable: true,
@@ -49,6 +49,8 @@ const LoginComponent: FC = () => {
       variables: {
         input: {
           emailAddress: input.email,
+          firstname: input.firstName,
+          lastname: input.lastName,
           password: input.password,
         },
       },
@@ -57,12 +59,18 @@ const LoginComponent: FC = () => {
   if (isLoggedIn) return null;
 
   return (
-    <FormContainer validationSchema={VALIDATION_SCHEMA} header="Log in" onSubmit={onSubmit}>
+    <FormContainer validationSchema={VALIDATION_SCHEMA} header="Sign up" onSubmit={onSubmit}>
+      <Item name="firstName" />
+
+      <Item name="lastName" />
+
       <Item name="email" placeholder="email@example.com" />
 
-      <Item name="password" placeholder="********" type="password" renderBelow={<ForgotPassword />} />
+      <Item name="password" type="password" />
+
+      <Item name="password2" label="Confirm password" type="password" />
     </FormContainer>
   );
 };
 
-export default LoginComponent;
+export default SignupComponent;

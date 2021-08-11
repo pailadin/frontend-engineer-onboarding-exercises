@@ -6,7 +6,7 @@ import { FC } from 'react';
 const Logout: FC = () => {
   const dispatch = useDispatch();
 
-  return <Redirect extraActions={(): void => void dispatch(clearUser())} />;
+  return <Redirect url="/login" extraActions={(): void => void dispatch(clearUser())} />;
 };
 
 export default Logout;

@@ -22,7 +22,7 @@ const HeaderLoggedIn: FC = () => {
         </Circle>
       </ItemWrapper>
 
-      <ButtonLink href="/products" onClick={logout}>
+      <ButtonLink href="/login" onClick={logout}>
         Logout
       </ButtonLink>
     </>

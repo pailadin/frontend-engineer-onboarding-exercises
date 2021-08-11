@@ -1,5 +1,5 @@
 import Layout from '@components/Layout';
-import Component from '@modules/LoginComponent';
+import { LoginComponent as Component } from '@modules/LoginSignupComponent';
 import { FC } from 'react';
 
 const LoginModule: FC = () => (

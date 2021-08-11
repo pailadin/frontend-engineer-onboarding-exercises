@@ -1,15 +1,17 @@
 import { useMutation } from '@apollo/client';
 import { useToast } from '@chakra-ui/react';
-import { FormContainer, Item } from '@components/Form';
-import { SIGNUP as MUTATION } from '@constants/graphql/mutations';
-import { SIGNUP as VALIDATION_SCHEMA } from '@constants/validation/user';
+import { Item } from '@components/Form';
+import { LOGIN as MUTATION } from '@constants/graphql/mutations';
+import { LOGIN as VALIDATION_SCHEMA } from '@constants/validation/user';
 import { useAppDispatch as useDispatch } from '@store/hooks';
 import { checkIfLoggedIn, setUserToken } from '@store/userSlice';
 import { useRouter } from 'next/router';
 import { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import ForgotPassword from './ForgotPassword';
+import FormContainer from './FormContainer';
 
-const SignupComponent: FC = () => {
+const LoginComponent: FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const toast = useToast();
@@ -21,13 +23,13 @@ const SignupComponent: FC = () => {
 
   const [mutate] = useMutation(MUTATION, {
     onCompleted: (data) => {
-      const token = data.signUp.token;
+      const token = data.authenticate.token;
 
       dispatch(setUserToken(token));
       void router.push('/products');
 
       toast({
-        title: 'Registered successfully',
+        title: 'Logged in!',
         description: 'Redirecting to products page...',
         status: 'success',
         isClosable: true,
@@ -48,8 +50,6 @@ const SignupComponent: FC = () => {
       variables: {
         input: {
           emailAddress: input.email,
-          firstname: input.firstName,
-          lastname: input.lastName,
           password: input.password,
         },
       },
@@ -58,18 +58,12 @@ const SignupComponent: FC = () => {
   if (isLoggedIn) return null;
 
   return (
-    <FormContainer validationSchema={VALIDATION_SCHEMA} header="Sign up" onSubmit={onSubmit}>
-      <Item name="firstName" />
-
-      <Item name="lastName" />
-
+    <FormContainer validationSchema={VALIDATION_SCHEMA} header="Log in" onSubmit={onSubmit}>
       <Item name="email" placeholder="email@example.com" />
 
-      <Item name="password" type="password" />
-
-      <Item name="password2" label="Confirm password" type="password" />
+      <Item name="password" placeholder="********" type="password" renderBelow={<ForgotPassword />} />
     </FormContainer>
   );
 };
 
-export default SignupComponent;
+export default LoginComponent;

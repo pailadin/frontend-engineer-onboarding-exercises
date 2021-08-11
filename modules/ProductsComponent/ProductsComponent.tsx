@@ -75,7 +75,7 @@ const ProductsComponent: FC = () => {
             Products
           </Text>
 
-          <AddProductButton />
+          {isLoggedIn && <AddProductButton />}
         </Flex>
 
         <Divider mt={4} mb={8} />
