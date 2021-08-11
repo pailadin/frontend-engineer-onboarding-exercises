@@ -2,12 +2,12 @@ import { useQuery } from '@apollo/client';
 import { Flex, HStack, Icon, IconButton, Image, Text, useToast } from '@chakra-ui/react';
 import AddToCartButton from '@components/AddToCartButton';
 import Loading from '@components/Loading';
+import ProductContainer from '@components/ProductContainer';
 import Redirect from '@components/Redirect';
 import { DEFAULT_PRODUCT_IMAGE } from '@constants/etc';
 import { GET_PRODUCTS as QUERY } from '@constants/graphql/queries';
 import { FC, useEffect } from 'react';
 import { FaEdit as IconEdit, FaTrashAlt as IconDelete } from 'react-icons/fa';
-import Breadcrumbs from './Breadcrumbs';
 
 interface Props {
   id: string | number;
@@ -46,59 +46,38 @@ const Product: FC<Props> = ({ id }) => {
   if (loading) return <Loading />;
 
   return (
-    <Flex
-      width="100%"
-      direction="column"
-      mt={{
-        base: 0,
-        sm: 8,
-        md: 16,
-        lg: 24,
-      }}
-    >
-      <Flex mb={6}>
-        <Breadcrumbs strings={['Products', product.name]} />
-      </Flex>
-
-      <Flex flexGrow={1}>
-        <Flex flexDirection="column">
+    <ProductContainer
+      breadcrumbs={product.name}
+      renderLeft={
+        <>
           <Image
             src={product.image}
             fallbackSrc={DEFAULT_PRODUCT_IMAGE}
             rounded="xl"
             objectFit="contain"
-            width={{
-              base: 0,
-              sm: 8 * 20,
-              md: 8 * 40,
-              lg: 8 * 50,
-              xl: 8 * 60,
-            }}
             height="auto"
           />
 
           <AddToCartButton mt={6} />
-        </Flex>
+        </>
+      }
+    >
+      <Flex justifyContent="space-between">
+        <Text fontSize="3xl" fontWeight="bold" isTruncated>
+          {product.name}
+        </Text>
 
-        <Flex pl={4} flexGrow={1} flexDirection="column">
-          <Flex justifyContent="space-between">
-            <Text fontSize="3xl" fontWeight="bold" isTruncated>
-              {product.name}
-            </Text>
+        <HStack spacing={2}>
+          <IconButton colorScheme="gray" icon={<Icon as={IconEdit} h={3} w={3} />} aria-label="Edit Button" />
 
-            <HStack spacing={2}>
-              <IconButton colorScheme="gray" icon={<Icon as={IconEdit} h={3} w={3} />} aria-label="Edit Button" />
-
-              <IconButton colorScheme="gray" icon={<Icon as={IconDelete} h={3} w={3} />} aria-label="Delete Button" />
-            </HStack>
-          </Flex>
-
-          <Flex mt={4}>
-            <Text>{product.description}</Text>
-          </Flex>
-        </Flex>
+          <IconButton colorScheme="gray" icon={<Icon as={IconDelete} h={3} w={3} />} aria-label="Delete Button" />
+        </HStack>
       </Flex>
-    </Flex>
+
+      <Flex mt={4}>
+        <Text>{product.description}</Text>
+      </Flex>
+    </ProductContainer>
   );
 };
 
