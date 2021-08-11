@@ -26,3 +26,13 @@ export const PRODUCT_ADD = gql`
     }
   }
 `;
+
+export const PRODUCT_EDIT = gql`
+  ${PRODUCT_FRAGMENT}
+
+  mutation updateProduct($input: UpdateProductInput!) {
+    updateProduct(input: $input) {
+      ...ProductFields
+    }
+  }
+`;

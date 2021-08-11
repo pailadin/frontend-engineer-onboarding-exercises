@@ -16,7 +16,8 @@ interface Props {
   successTitleSuffix: string;
   validationSchema: ObjectShape;
   breadcrumbs: string | Array<string>;
-  mapFormInputToGraphQL?: () => Record<string, unknown>;
+  mapFormInputToGraphQL?: (input: Record<string, unknown>) => unknown;
+  defaultValues?: Record<string, unknown>;
   successDescription?: string;
   cancelUrl?: string;
 }
@@ -27,12 +28,11 @@ const ProductAddEdit: FC<Props> = ({
   successTitleSuffix,
   validationSchema,
   breadcrumbs,
-  mapFormInputToGraphQL = (input: Record<string, unknown>): Record<string, unknown> => {
-    return {
-      name: input.name,
-      description: input.description,
-    };
-  },
+  mapFormInputToGraphQL = (input: Record<string, unknown>): Record<string, unknown> => ({
+    name: input.name,
+    description: input.description,
+  }),
+  defaultValues = {},
   successDescription,
   cancelUrl,
 }) => {
@@ -65,6 +65,7 @@ const ProductAddEdit: FC<Props> = ({
   const formMethods = useForm({
     mode: 'all',
     resolver: yupResolver(yup.object().shape(validationSchema)),
+    defaultValues,
   });
 
   const onSubmit = (input: Record<string, unknown>): Promise<unknown> =>

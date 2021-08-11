@@ -7,3 +7,9 @@ export const CREATE = {
   name: name.required(),
   description: description.required(),
 };
+
+// Currently the same, just in case
+export const EDIT = {
+  name: name.required(),
+  description: description.required(),
+};
