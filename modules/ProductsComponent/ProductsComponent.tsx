@@ -7,6 +7,7 @@ import { getFakeProductData, getProductFetchStatus, getProducts } from '@store/p
 import { checkIfLoggedIn } from '@store/userSlice';
 import { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import AddProductButton from './AddProductButton';
 import Navigation from './Navigation';
 import ProductList from './ProductList';
 
@@ -69,9 +70,13 @@ const ProductsComponent: FC = () => {
   return (
     <Flex mt={20} mb={8} w="100%" direction="column">
       <Flex width="100%" direction="column">
-        <Text fontSize="3xl" fontWeight="bold">
-          Products
-        </Text>
+        <Flex justifyContent="space-between">
+          <Text fontSize="3xl" fontWeight="bold">
+            Products
+          </Text>
+
+          <AddProductButton />
+        </Flex>
 
         <Divider mt={4} mb={8} />
       </Flex>

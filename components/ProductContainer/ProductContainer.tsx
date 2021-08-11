@@ -6,9 +6,17 @@ interface Props {
   children: ReactNode;
   renderLeft?: ReactNode;
   breadcrumbs?: string | Array<string>;
+  bgColor?: string;
+  [x: string]: unknown;
 }
 
-const ProductContainer: FC<Props> = ({ children, renderLeft, breadcrumbs: breadcrumbsProp }) => {
+const ProductContainer: FC<Props> = ({
+  children,
+  renderLeft,
+  breadcrumbs: breadcrumbsProp,
+  bgColor = 'white',
+  ...rest
+}) => {
   const breadcrumbs = breadcrumbsProp ? Array.from(new Set(['Products'].concat(breadcrumbsProp))) : null;
 
   return (
@@ -21,6 +29,7 @@ const ProductContainer: FC<Props> = ({ children, renderLeft, breadcrumbs: breadc
         md: 16,
         lg: 24,
       }}
+      {...rest}
     >
       {breadcrumbs && (
         <Flex mb={6}>
@@ -28,17 +37,17 @@ const ProductContainer: FC<Props> = ({ children, renderLeft, breadcrumbs: breadc
         </Flex>
       )}
 
-      <Flex flexGrow={1}>
+      <Flex bgColor={bgColor}>
         {renderLeft && (
           <Flex
             display={{ base: 'none', md: 'flex' }}
             flexDirection="column"
-            width={{
+            flexShrink={0}
+            flexGrow={0}
+            flexBasis={{
               base: 0,
-              sm: 8 * 20,
-              md: 8 * 40,
-              lg: 8 * 50,
-              xl: 8 * 60,
+              sm: '30%',
+              lg: '40%',
             }}
           >
             {renderLeft}

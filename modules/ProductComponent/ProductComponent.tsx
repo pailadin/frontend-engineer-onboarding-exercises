@@ -47,6 +47,7 @@ const Product: FC<Props> = ({ id }) => {
 
   return (
     <ProductContainer
+      bgColor="inherit"
       breadcrumbs={product.name}
       renderLeft={
         <>
