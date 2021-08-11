@@ -10,7 +10,7 @@ import { CREATE as VALIDATION_SCHEMA } from '@constants/validation/product';
 import { checkIfLoggedIn } from '@store/userSlice';
 import { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import ProductAddUpdate from './ProductAddUpdate';
+import ProductAddEdit from './ProductAddEdit';
 
 const ProductAdd: FC = () => {
   const toast = useToast();
@@ -36,7 +36,7 @@ const ProductAdd: FC = () => {
   if (loading) return <Loading />;
 
   return (
-    <ProductAddUpdate
+    <ProductAddEdit
       mutation={PRODUCT_ADD}
       dataPath="createProduct"
       successTitleSuffix="created"
@@ -54,7 +54,7 @@ const ProductAdd: FC = () => {
       <Item name="name" label="Title" />
 
       <Item name="description" multiline={true} />
-    </ProductAddUpdate>
+    </ProductAddEdit>
   );
 };
 

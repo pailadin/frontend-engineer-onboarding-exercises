@@ -21,7 +21,7 @@ interface Props {
   cancelUrl?: string;
 }
 
-const ProductAddUpdate: FC<Props> = ({
+const ProductAddEdit: FC<Props> = ({
   children,
   mutation,
   dataPath,
@@ -110,4 +110,4 @@ const ProductAddUpdate: FC<Props> = ({
   );
 };
 
-export default ProductAddUpdate;
+export default ProductAddEdit;
