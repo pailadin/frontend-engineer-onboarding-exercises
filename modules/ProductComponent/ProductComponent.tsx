@@ -14,7 +14,7 @@ import Container from './Container';
 import DeleteIconButton from './DeleteIconButton';
 
 interface Props {
-  id: string | number;
+  id: string;
 }
 
 const Product: FC<Props> = ({ id }) => {

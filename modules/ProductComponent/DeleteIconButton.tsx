@@ -20,7 +20,7 @@ import { FC } from 'react';
 import { FaTrashAlt as IconDelete } from 'react-icons/fa';
 
 interface Props {
-  id: string | number;
+  id: string;
 }
 
 const ProductDeleteButtonModal: FC<Props> = ({ id }) => {

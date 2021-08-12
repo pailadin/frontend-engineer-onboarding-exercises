@@ -1,12 +1,12 @@
 import { Center, SimpleGrid, Text } from '@chakra-ui/react';
 import { FC } from 'react';
-import Item from './Item';
+import Product from './ProductItem';
 
 interface Owner {
   id: string;
 }
-interface Item {
-  id: string | number;
+interface Product {
+  id: string;
   name: string;
   image?: string;
   description: string;
@@ -14,7 +14,7 @@ interface Item {
 }
 
 interface Props {
-  products: Array<Item>;
+  products: Array<Product>;
   currentUserId?: string | null;
 }
 
@@ -43,7 +43,7 @@ const ProductList: FC<Props> = ({ products, currentUserId }) => {
       spacing={8}
     >
       {products.map((product) => (
-        <Item key={product.id} currentUserId={currentUserId} ownerUserId={product.owner.id} {...product} />
+        <Product key={product.id} currentUserId={currentUserId} ownerUserId={product.owner.id} {...product} />
       ))}
     </SimpleGrid>
   );

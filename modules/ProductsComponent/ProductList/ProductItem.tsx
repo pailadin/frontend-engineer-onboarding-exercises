@@ -4,9 +4,10 @@ import AddToCartButton from '@components/AddToCartButton';
 import { DEFAULT_PRODUCT_IMAGE } from '@constants/etc';
 import Link from 'next/link';
 import { FC } from 'react';
+import MenuButton from './MenuButton';
 
 interface Props {
-  id: string | number;
+  id: string;
   name: string;
   image?: string;
   description: string;
@@ -15,7 +16,6 @@ interface Props {
 }
 
 const Product: FC<Props> = ({ id, name, image = DEFAULT_PRODUCT_IMAGE, description, currentUserId, ownerUserId }) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const isCurrentUserOwner = currentUserId === ownerUserId;
 
   return (
@@ -38,18 +38,19 @@ const Product: FC<Props> = ({ id, name, image = DEFAULT_PRODUCT_IMAGE, descripti
         boxShadow="md"
         cursor="pointer"
       >
-        <Stack>
+        <Stack position="relative" display={{ base: 'none', sm: 'flex' }}>
           <Image
             src={image}
             roundedTop="lg"
             fit="cover"
             maxHeight={{
-              base: 0,
               sm: 8 * 15,
               md: 8 * 20,
               lg: 8 * 25,
             }}
           />
+
+          {isCurrentUserOwner && <MenuButton id={id} />}
         </Stack>
 
         <Stack flexGrow={1} spacing={4} p={4}>

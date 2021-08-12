@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 import ProductAddEdit from './ProductAddEdit';
 
 interface Props {
-  id: string | number;
+  id: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
