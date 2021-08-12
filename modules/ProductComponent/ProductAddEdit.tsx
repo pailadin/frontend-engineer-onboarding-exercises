@@ -18,8 +18,8 @@ interface Props {
   breadcrumbs: string | Array<string>;
   mapFormInputToGraphQL?: (input: Record<string, unknown>) => unknown;
   defaultValues?: Record<string, unknown>;
-  successDescription?: string;
   cancelUrl?: string;
+  successDescription?: string;
 }
 
 const ProductAddEdit: FC<Props> = ({
@@ -33,8 +33,8 @@ const ProductAddEdit: FC<Props> = ({
     description: input.description,
   }),
   defaultValues = {},
+  cancelUrl = '/products',
   successDescription,
-  cancelUrl,
 }) => {
   const router = useRouter();
   const toast = useToast();
@@ -76,11 +76,9 @@ const ProductAddEdit: FC<Props> = ({
     });
 
   const cancel = (): void => {
-    if (cancelUrl) {
-      void router.push(cancelUrl);
-    } else {
-      void router.back();
-    }
+    void router.back();
+    // Got this idea from here https://stackoverflow.com/a/16580197:
+    void router.push(cancelUrl);
   };
 
   const submitDisabled =
