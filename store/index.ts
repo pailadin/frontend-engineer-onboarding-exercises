@@ -1,6 +1,5 @@
 import store, { persistor } from './store';
 
-export default store;
+export type { AppDispatch, RootState } from './store';
 export { persistor };
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export default store;
