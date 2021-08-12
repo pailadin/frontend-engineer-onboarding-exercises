@@ -29,7 +29,7 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({ breadcrumbs: breadcrumbsProp = [] }
         return (
           <Fragment key={i}>
             <Link href={href}>
-              <Text fontSize="sm" color={TEXT_COLOR}>
+              <Text fontSize="sm" color={TEXT_COLOR} cursor={href ? 'pointer' : 'default'}>
                 {label}
               </Text>
             </Link>
