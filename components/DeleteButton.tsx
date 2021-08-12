@@ -41,6 +41,7 @@ const DeleteButton: FC<Props> = ({
 
   const [mutate, { loading }] = useMutation(PRODUCT_DELETE, {
     onCompleted: (data) => {
+      onClose();
       onCompleted(data);
 
       toast({
@@ -50,7 +51,6 @@ const DeleteButton: FC<Props> = ({
       });
     },
     onError: (e) => {
-      onClose();
       onError(onError);
 
       toast({
