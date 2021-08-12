@@ -20,6 +20,7 @@ const AddToCartButton: FC<Props> = (props) => {
         bgColor: TEXT_COLOR,
         color: BG_COLOR,
       }}
+      onClick={(event): void => event.stopPropagation()}
       {...props}
     >
       <HStack>

@@ -58,7 +58,7 @@ const Product: FC<Props> = ({ id, name, image = DEFAULT_PRODUCT_IMAGE, descripti
             {name}
           </Text>
 
-          <Text whiteSpace="pre-wrap" noOfLines={{ base: 1, sm: 2, md: 4, lg: 6 }}>
+          <Text whiteSpace="pre-wrap" noOfLines={{ base: 1, sm: 2, md: 3, lg: 5 }}>
             {description}
           </Text>
         </Stack>
