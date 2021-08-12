@@ -30,7 +30,7 @@ export const GET_PRODUCTS_AND_USER = gql`
   ${PRODUCT_CONNECTION_FRAGMENT}
 
   query products(
-    $first: Int
+    $first: Int = 12
     $after: Binary
     $last: Int
     $before: Binary
