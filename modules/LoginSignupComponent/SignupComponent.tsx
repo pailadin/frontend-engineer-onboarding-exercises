@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client';
 import { useToast } from '@chakra-ui/react';
-import { Item } from '@components/Form';
+import { Input } from '@components/Form';
 import { SIGNUP as MUTATION } from '@constants/graphql/mutations';
 import { SIGNUP as VALIDATION_SCHEMA } from '@constants/validation/user';
 import { useAppDispatch as useDispatch } from '@store/hooks';
@@ -60,15 +60,15 @@ const SignupComponent: FC = () => {
 
   return (
     <FormContainer validationSchema={VALIDATION_SCHEMA} header="Sign up" onSubmit={onSubmit}>
-      <Item name="firstName" />
+      <Input name="firstName" />
 
-      <Item name="lastName" />
+      <Input name="lastName" />
 
-      <Item name="email" placeholder="email@example.com" />
+      <Input name="email" placeholder="email@example.com" />
 
-      <Item name="password" type="password" />
+      <Input name="password" type="password" />
 
-      <Item name="password2" label="Confirm password" type="password" />
+      <Input name="password2" label="Confirm password" type="password" />
     </FormContainer>
   );
 };

@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client';
 import { useToast } from '@chakra-ui/react';
-import { Item } from '@components/Form';
+import { Input } from '@components/Form';
 import { LOGIN as MUTATION } from '@constants/graphql/mutations';
 import { LOGIN as VALIDATION_SCHEMA } from '@constants/validation/user';
 import { useAppDispatch as useDispatch } from '@store/hooks';
@@ -59,9 +59,9 @@ const LoginComponent: FC = () => {
 
   return (
     <FormContainer validationSchema={VALIDATION_SCHEMA} header="Log in" onSubmit={onSubmit}>
-      <Item name="email" placeholder="email@example.com" />
+      <Input name="email" placeholder="email@example.com" />
 
-      <Item name="password" placeholder="********" type="password" renderBelow={<ForgotPassword />} />
+      <Input name="password" placeholder="********" type="password" renderBelow={<ForgotPassword />} />
     </FormContainer>
   );
 };

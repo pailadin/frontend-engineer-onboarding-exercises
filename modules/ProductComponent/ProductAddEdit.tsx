@@ -1,6 +1,6 @@
 import { DocumentNode, useMutation } from '@apollo/client';
 import { Button, Flex, Stack, Text, useToast } from '@chakra-ui/react';
-import { Item } from '@components/Form';
+import { Input, InputTextarea } from '@components/Form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
@@ -100,9 +100,9 @@ const ProductAddEdit: FC<Props> = ({
       <FormProvider {...formMethods}>
         <Flex flex={1} as={'form'} onSubmit={formMethods.handleSubmit(onSubmit)}>
           <Stack p={4} spacing={6} flex={1}>
-            <Item name="name" label="Title" />
+            <Input name="name" label="Title" />
 
-            <Item name="description" multiline={true} />
+            <InputTextarea name="description" />
 
             <Stack direction="row" spacing={4}>
               <Button type="submit" colorScheme="purple" disabled={submitDisabled}>
