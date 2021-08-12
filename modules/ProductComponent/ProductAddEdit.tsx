@@ -84,17 +84,17 @@ const ProductAddEdit: FC<Props> = ({
     formMethods.formState.isSubmitting || !formMethods.formState.isDirty || !formMethods.formState.isValid;
 
   return (
-    <Container
-      breadcrumbs={breadcrumbs}
-      renderLeft={
-        <Flex p={4} flex={1} direction="column">
-          <Text mb={4}>Photo</Text>
+    <FormProvider {...formMethods}>
+      <Container
+        breadcrumbs={breadcrumbs}
+        renderLeft={
+          <Flex p={4} flex={1} direction="column">
+            <Text mb={4}>Photo</Text>
 
-          <FileUploadBox />
-        </Flex>
-      }
-    >
-      <FormProvider {...formMethods}>
+            <FileUploadBox hasImage={Object.keys(defaultValues).length > 0} />
+          </Flex>
+        }
+      >
         <Flex flex={1} as={'form'} onSubmit={formMethods.handleSubmit(onSubmit)}>
           <Stack p={4} spacing={6} flex={1}>
             <Input name="name" label="Title" />
@@ -112,8 +112,8 @@ const ProductAddEdit: FC<Props> = ({
             </Stack>
           </Stack>
         </Flex>
-      </FormProvider>
-    </Container>
+      </Container>
+    </FormProvider>
   );
 };
 
