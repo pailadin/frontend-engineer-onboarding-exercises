@@ -14,7 +14,7 @@ const LayoutHeader: FC = () => {
   const isLoggedIn = useSelector(checkIfLoggedIn);
 
   return (
-    <Container mb="2px">
+    <Container mb="2px" alignItems="stretch">
       <Box>
         <Stack spacing={8}>
           <ItemWrapper display={{ base: 'none', md: 'flex' }}>
