@@ -7,15 +7,14 @@ import { FC } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { ObjectShape } from 'yup/lib/object';
-import Container from './Container';
+import Container, { BreadcrumbsProps } from './Container';
 import FileUploadBox from './FileUploadBox';
 
-interface Props {
+interface Props extends BreadcrumbsProps {
   mutation: DocumentNode;
   dataPath: string;
   successTitleSuffix: string;
   validationSchema: ObjectShape;
-  breadcrumbs: string | Array<string>;
   mapFormInputToGraphQL?: (input: Record<string, unknown>) => unknown;
   defaultValues?: Record<string, unknown>;
   cancelUrl?: string;
