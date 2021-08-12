@@ -17,7 +17,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
     Array(Math.max(0, Number(pages)))
       .fill(PRODUCT)
       .map((x, i) => ({
-        id: i,
+        id: String(i),
         ...x,
       }))
   );
