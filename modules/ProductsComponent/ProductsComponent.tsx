@@ -14,7 +14,9 @@ const ITEMS_PER_PAGE = 12;
 const ProductsComponent: FC = () => {
   const isLoggedIn = useSelector(checkIfLoggedIn);
 
-  const { loading, error, data } = useQuery(isLoggedIn ? GET_PRODUCTS_AND_USER : GET_PRODUCTS);
+  const { loading, error, data } = useQuery(isLoggedIn ? GET_PRODUCTS_AND_USER : GET_PRODUCTS, {
+    fetchPolicy: 'cache-and-network',
+  });
 
   const [currentPage, setCurrentPage] = useState(1); // Reminder: starts at ONE
 
