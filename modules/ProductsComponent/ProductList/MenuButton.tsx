@@ -1,4 +1,5 @@
 import { Icon, IconButton, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
+import DeleteButton from '@components/DeleteButton';
 import { useRouter } from 'next/router';
 import React, { FC } from 'react';
 import { FaEllipsisV as IconEllipsis } from 'react-icons/fa';
@@ -13,15 +14,16 @@ const ProductMenuButton: FC<Props> = ({ id }) => {
 
   const stopPropagation = (event): void => event.stopPropagation();
 
-  const editProduct = (event): void => {
+  const onClickEdit = (event): void => {
     stopPropagation(event);
 
     void router.push(`/product/edit/${id}`);
   };
 
-  const deleteProduct = (event): void => {
-    // TODO functionality
+  const onClickDelete = (event, deleteProduct): void => {
     stopPropagation(event);
+
+    deleteProduct();
   };
 
   return (
@@ -40,9 +42,11 @@ const ProductMenuButton: FC<Props> = ({ id }) => {
       />
 
       <MenuList>
-        <MenuItem onClick={editProduct}>Edit</MenuItem>
+        <MenuItem onClick={onClickEdit}>Edit</MenuItem>
 
-        <MenuItem onClick={deleteProduct}>Delete</MenuItem>
+        <DeleteButton id={id} as={MenuItem} onClick={onClickDelete}>
+          Delete
+        </DeleteButton>
       </MenuList>
     </Menu>
   );
