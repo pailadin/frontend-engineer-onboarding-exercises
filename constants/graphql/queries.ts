@@ -13,7 +13,8 @@ export const GET_PRODUCTS = gql`
   ${PRODUCT_CONNECTION_FRAGMENT}
 
   query products(
-    $first: Int
+    # TEMP Awaiting info, so for now fetching ALL
+    $first: Int = 9001
     $after: Binary
     $last: Int
     $before: Binary
