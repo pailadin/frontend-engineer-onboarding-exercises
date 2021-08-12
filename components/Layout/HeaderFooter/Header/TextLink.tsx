@@ -1,12 +1,10 @@
-import { Text } from '@chakra-ui/react';
+import { Text, TextProps } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
 import ItemWrapper from '../ItemWrapper';
 
-interface Props {
-  children: string;
+interface Props extends TextProps {
   href: string;
-  rest?: unknown;
 }
 
 const TextLink: FC<Props> = ({ children, href, ...rest }) => {

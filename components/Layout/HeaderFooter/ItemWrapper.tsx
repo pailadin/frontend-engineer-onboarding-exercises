@@ -1,11 +1,9 @@
-import { Center, Flex } from '@chakra-ui/react';
+import { Center, Flex, FlexProps } from '@chakra-ui/react';
 import Link from 'next/link';
-import { FC, ReactNode } from 'react';
+import { FC } from 'react';
 
-interface Props {
-  children: ReactNode;
+interface Props extends FlexProps {
   href?: string;
-  [x: string]: unknown;
 }
 
 const ItemWrapper: FC<Props> = ({ href, children, ...rest }) => {

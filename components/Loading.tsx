@@ -1,10 +1,9 @@
-import { Center, Spinner } from '@chakra-ui/react';
+import { Center, Spinner, SpinnerProps } from '@chakra-ui/react';
 import { FC, ReactElement } from 'react';
 
-interface Props {
+interface Props extends SpinnerProps {
   children?: ReactElement;
   loading?: boolean;
-  [x: string]: unknown;
 }
 
 const Loading: FC<Props> = ({ children, loading = false, ...rest }) => {

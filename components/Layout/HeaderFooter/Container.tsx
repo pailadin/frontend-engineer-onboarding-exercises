@@ -1,10 +1,5 @@
-import { Flex } from '@chakra-ui/react';
-import React, { FC, ReactNode } from 'react';
-
-interface Props {
-  children: ReactNode;
-  [x: string]: unknown;
-}
+import { Flex, FlexProps } from '@chakra-ui/react';
+import React, { FC } from 'react';
 
 const PADDING_HORIZONTAL = {
   base: 2,
@@ -13,7 +8,7 @@ const PADDING_HORIZONTAL = {
   lg: 24,
 };
 
-const HeaderFooterContainer: FC<Props> = ({ children, ...rest }) => {
+const HeaderFooterContainer: FC<FlexProps> = ({ children, ...rest }) => {
   return (
     <Flex
       bgColor="white"

@@ -1,19 +1,15 @@
-import { Box, Button, Divider, Flex, Grid, Stack, Text, useTheme } from '@chakra-ui/react';
+import { Box, Button, Divider, Flex, FlexProps, Grid, Stack, Text, useTheme } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { FC, ReactNode } from 'react';
+import { FC } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { ObjectShape } from 'yup/lib/object';
 
-interface Props {
-  children: ReactNode;
+interface Props extends Omit<FlexProps, 'onSubmit'> {
   validationSchema: ObjectShape;
   header?: string;
   onSubmit: (data: Record<string, unknown>) => void;
   submitButtonText?: string;
-  // Taken from here: https://stackoverflow.com/a/58201122
-  // TODO Confirm if this is fine
-  [x: string]: unknown;
 }
 
 const FormContainer: FC<Props> = ({ children, validationSchema, header, onSubmit, submitButtonText, ...rest }) => {
