@@ -88,7 +88,7 @@ const Product: FC<Props> = ({ id }) => {
       </Flex>
 
       <Flex mt={4}>
-        <Text>{product.description}</Text>
+        <Text whiteSpace="pre-wrap">{product.description}</Text>
       </Flex>
     </Container>
   );
