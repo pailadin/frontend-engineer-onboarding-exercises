@@ -62,7 +62,7 @@ const DeleteButton: FC<Props> = ({
     },
   });
 
-  const deleteProduct = (): void => void mutate({ variables: { input: { id: 'fail' } } });
+  const deleteProduct = (): void => void mutate({ variables: { input: { id } } });
 
   const onClickOpenButton = (event): void => {
     event.stopPropagation();
