@@ -33,6 +33,7 @@ export const PRODUCT_CONNECTION_FRAGMENT = gql`
       hasPreviousPage
       startCursor
       endCursor
+      totalCount
     }
   }
 `;
