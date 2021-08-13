@@ -17,6 +17,7 @@ const ProductsComponent: FC = () => {
   const [currentPage, setCurrentPage] = useState(1); // Reminder: starts at ONE
 
   const { loading, inCache, error, data } = useQuery(isLoggedIn ? GET_PRODUCTS_AND_USER : GET_PRODUCTS);
+  // console.log({ loading, inCache, error, data });
 
   const products = data?.products?.edges?.map((edge) => edge.node) || [];
   const userId = (isLoggedIn && data?.me?.id) || null;

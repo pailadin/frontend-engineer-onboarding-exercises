@@ -12,7 +12,7 @@ export const GET_CURRENT_USER = gql`
 export const GET_PRODUCTS = gql`
   ${PRODUCT_CONNECTION_FRAGMENT}
 
-  query products(
+  query getProducts(
     # TEMP Awaiting info, so for now fetching ALL
     $first: Int = 9001
     $after: Binary
@@ -30,7 +30,7 @@ export const GET_PRODUCTS = gql`
 export const GET_PRODUCTS_AND_USER = gql`
   ${PRODUCT_CONNECTION_FRAGMENT}
 
-  query products(
+  query getProductsAndUser(
     # TEMP Awaiting info, so for now fetching ALL
     $first: Int = 9001
     $after: Binary
