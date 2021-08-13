@@ -53,6 +53,16 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
         new ApolloClient({
           uri: process.env.NEXT_PUBLIC_GRAPHQL_URI || DEFAULT_GRAPHQL_URI,
           cache,
+          defaultOptions: {
+            // https://github.com/apollographql/apollo-client/issues/2555#issuecomment-490866804:
+            watchQuery: {
+              fetchPolicy: 'cache-and-network',
+              errorPolicy: 'all',
+            },
+            query: {
+              errorPolicy: 'all',
+            },
+          },
           headers,
         })
       );
