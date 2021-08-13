@@ -7,7 +7,9 @@ import { FC, useEffect, useState } from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
-const DEFAULT_GRAPHQL_URI = 'https://frontend-engineer-onboarding-api-thxaa.ondigitalocean.app/graphql';
+const DEFAULT_GRAPHQL_URI =
+  process.env.NEXT_PUBLIC_GRAPHQL_URI || 'https://frontend-engineer-onboarding-api-thxaa.ondigitalocean.app/graphql';
+const APOLLO_PERSIST_LOG_ENABLED = process.env.NEXT_PUBLIC_APOLLO_PERSIST_LOG === 'true';
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
   const [apolloClient, setApolloClient] = useState<ApolloClient<NormalizedCacheObject>>();
@@ -42,7 +44,7 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
       const newPersistor = new CachePersistor({
         cache,
         storage: new LocalStorageWrapper(window.localStorage),
-        debug: true,
+        debug: APOLLO_PERSIST_LOG_ENABLED,
         trigger: 'write',
       });
       await newPersistor.restore();
