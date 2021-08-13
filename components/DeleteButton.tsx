@@ -41,7 +41,8 @@ const DeleteButton: FC<Props> = ({
   const toast = useToast();
 
   const [mutate, { loading }] = useMutation(PRODUCT_DELETE, {
-    refetchQueries: [GET_PRODUCTS, 'getProducts'],
+    // TODO The refetch gives a warning:
+    refetchQueries: [GET_PRODUCTS, 'products'],
     onCompleted: (data) => {
       onClose();
       onCompleted(data);
