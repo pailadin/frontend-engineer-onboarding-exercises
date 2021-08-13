@@ -1,26 +1,25 @@
 import { Center, Divider, Flex, Text } from '@chakra-ui/react';
 import Loading from '@components/Loading';
-import { GET_PRODUCTS, GET_PRODUCTS_AND_USER } from '@constants/graphql/queries';
-import { checkIfLoggedIn } from '@store/userSlice';
+import { GET_PRODUCTS } from '@constants/graphql/queries';
 import { useQuery } from '@utils/api';
 import { FC, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import AddProductButton from './AddProductButton';
 import Navigation from './Navigation';
 import ProductList from './ProductList';
 
 const ITEMS_PER_PAGE = 12;
 
-const ProductsComponent: FC = () => {
-  const isLoggedIn = useSelector(checkIfLoggedIn);
+interface Props {
+  userId: string | null;
+}
 
+const ProductsComponent: FC<Props> = ({ userId }) => {
   const [currentPage, setCurrentPage] = useState(1); // Reminder: starts at ONE
 
-  const { loading, inCache, error, data } = useQuery(isLoggedIn ? GET_PRODUCTS_AND_USER : GET_PRODUCTS);
+  const { loading, inCache, error, data } = useQuery(GET_PRODUCTS);
   // console.log({ loading, inCache, error, data });
 
   const products = data?.products?.edges?.map((edge) => edge.node) || [];
-  const userId = (isLoggedIn && data?.me?.id) || null;
 
   const numberOfProducts = Math.max(0, data?.products?.pageInfo?.totalCount || products.length);
   const lastPage = Math.max(1, Math.ceil(numberOfProducts / ITEMS_PER_PAGE));
@@ -62,7 +61,7 @@ const ProductsComponent: FC = () => {
             Products
           </Text>
 
-          {isLoggedIn && <AddProductButton />}
+          {userId && <AddProductButton />}
         </Flex>
 
         <Divider mt={4} mb={8} />

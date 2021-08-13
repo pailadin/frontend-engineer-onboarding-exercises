@@ -26,24 +26,3 @@ export const GET_PRODUCTS = gql`
     }
   }
 `;
-
-export const GET_PRODUCTS_AND_USER = gql`
-  ${PRODUCT_CONNECTION_FRAGMENT}
-
-  query products(
-    # TEMP Awaiting info, so for now fetching ALL
-    $first: Int = 9001
-    $after: Binary
-    $last: Int
-    $before: Binary
-    $filter: ProductsFilter
-    $sort: ProductSortInput
-  ) {
-    me {
-      id
-    }
-    products(first: $first, after: $after, last: $last, before: $before, filter: $filter, sort: $sort) {
-      ...ProductConnectionFields
-    }
-  }
-`;

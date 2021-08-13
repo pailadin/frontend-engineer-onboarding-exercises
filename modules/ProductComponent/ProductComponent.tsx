@@ -3,35 +3,32 @@ import AddToCartButton from '@components/AddToCartButton';
 import Loading from '@components/Loading';
 import Redirect from '@components/Redirect';
 import { DEFAULT_PRODUCT_IMAGE } from '@constants/etc';
-import { GET_PRODUCTS, GET_PRODUCTS_AND_USER } from '@constants/graphql/queries';
-import { checkIfLoggedIn } from '@store/userSlice';
+import { GET_PRODUCTS } from '@constants/graphql/queries';
 import { useQuery } from '@utils/api';
 import Link from 'next/link';
 import { FC, useEffect } from 'react';
 import { FaEdit as IconEdit } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
 import Container from './Container';
 import DeleteIconButton from './DeleteIconButton';
 
 interface Props {
-  id: string;
+  productId: string;
+  userId: string | null;
 }
 
-const Product: FC<Props> = ({ id }) => {
+const Product: FC<Props> = ({ productId, userId }) => {
   const toast = useToast();
-  const isLoggedIn = useSelector(checkIfLoggedIn);
 
-  const { loading, inCache, error, data } = useQuery(isLoggedIn ? GET_PRODUCTS_AND_USER : GET_PRODUCTS, {
+  const { loading, inCache, error, data } = useQuery(GET_PRODUCTS, {
     variables: {
       filter: {
         id: {
-          eq: id,
+          eq: productId,
         },
       },
     },
   });
 
-  const userId = data?.me?.id || null;
   const product = data?.products?.edges?.[0]?.node;
   const ownerUserId = product?.owner?.id;
   const isCurrentUserOwner = userId === ownerUserId; // afaik, no way to just do this in filter
@@ -78,7 +75,7 @@ const Product: FC<Props> = ({ id }) => {
 
         {isCurrentUserOwner && (
           <HStack spacing={2}>
-            <Link href={`/product/edit/${id}`}>
+            <Link href={`/product/edit/${productId}`}>
               <IconButton colorScheme="gray" icon={<Icon as={IconEdit} h={3} w={3} />} aria-label="Edit Button" />
             </Link>
 
