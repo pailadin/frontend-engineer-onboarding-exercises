@@ -33,6 +33,7 @@
     "@emotion/styled": "^11.3.0",
     "@hookform/resolvers": "^2.7.1",
     "@reduxjs/toolkit": "^1.6.1",
+    "apollo3-cache-persist": "^0.12.1",
     "change-case": "^4.1.2",
     "framer-motion": "^4.1.17",
     "graphql": "^15.5.1",
