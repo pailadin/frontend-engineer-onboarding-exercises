@@ -1,3 +1,4 @@
+import { ApolloQueryResult, OperationVariables } from '@apollo/client';
 import { Center, SimpleGrid, Text } from '@chakra-ui/react';
 import { FC } from 'react';
 import Product from './ProductItem';
@@ -16,9 +17,12 @@ interface Product {
 interface Props {
   products: Array<Product>;
   currentUserId?: string | null;
+  // Originally was passing refetch to the delete button,
+  // but there are better ways to do this:
+  refetch?: (variables?: Partial<OperationVariables> | undefined) => Promise<ApolloQueryResult<unknown>>;
 }
 
-const ProductList: FC<Props> = ({ products, currentUserId }) => {
+const ProductList: FC<Props> = ({ products, currentUserId, refetch }) => {
   if (products.length <= 0) {
     return (
       <Center flexGrow={1}>
@@ -43,7 +47,12 @@ const ProductList: FC<Props> = ({ products, currentUserId }) => {
       spacing={8}
     >
       {products.map((product) => (
-        <Product key={product.id} currentUserId={currentUserId} ownerUserId={product.owner.id} {...product} />
+        <Product
+          key={product.id}
+          isCurrentUserOwner={currentUserId === product.owner.id}
+          {...product}
+          refetch={refetch}
+        />
       ))}
     </SimpleGrid>
   );

@@ -3,7 +3,7 @@ import { Center, Divider, Flex, Text } from '@chakra-ui/react';
 import Loading from '@components/Loading';
 import { GET_PRODUCTS, GET_PRODUCTS_AND_USER } from '@constants/graphql/queries';
 import { checkIfLoggedIn } from '@store/userSlice';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import AddProductButton from './AddProductButton';
 import Navigation from './Navigation';
@@ -14,18 +14,27 @@ const ITEMS_PER_PAGE = 12;
 const ProductsComponent: FC = () => {
   const isLoggedIn = useSelector(checkIfLoggedIn);
 
+  const [currentPage, setCurrentPage] = useState(1); // Reminder: starts at ONE
+
   const { loading, error, data } = useQuery(isLoggedIn ? GET_PRODUCTS_AND_USER : GET_PRODUCTS, {
     fetchPolicy: 'cache-and-network',
   });
 
-  const [currentPage, setCurrentPage] = useState(1); // Reminder: starts at ONE
+  const products = data?.products?.edges?.map((edge) => edge.node) || [];
+  const userId = (isLoggedIn && data?.me?.id) || null;
+
+  const numberOfProducts = Math.max(0, data?.products?.pageInfo?.totalCount || products.length);
+  const lastPage = Math.max(1, Math.ceil(numberOfProducts / ITEMS_PER_PAGE));
+
+  useEffect(() => {
+    if (currentPage > lastPage) {
+      setCurrentPage(lastPage);
+    }
+  }, [currentPage, lastPage]);
 
   if (loading) {
     return <Loading />;
   }
-
-  const products = data.products.edges.map((edge) => edge.node);
-  const userId = (isLoggedIn && data?.me?.id) || null;
 
   /* eslint-enable @typescript-eslint/no-unnecessary-condition */
 
@@ -37,9 +46,6 @@ const ProductsComponent: FC = () => {
       </Center>
     );
   }
-
-  const numberOfProducts = Math.max(0, data.products.pageInfo.totalCount); // probably unnecessary check;
-  const lastPage = Math.ceil(numberOfProducts / ITEMS_PER_PAGE);
 
   const goToPage = (page: number): number => {
     const newPage = Math.max(1, Math.min(lastPage, page));

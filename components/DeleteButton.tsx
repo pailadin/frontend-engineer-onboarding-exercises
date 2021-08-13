@@ -15,6 +15,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { PRODUCT_DELETE } from '@constants/graphql/mutations';
+import { GET_PRODUCTS } from '@constants/graphql/queries';
 import { FC } from 'react';
 
 interface Props extends Omit<BoxProps, 'onClick'> {
@@ -40,6 +41,7 @@ const DeleteButton: FC<Props> = ({
   const toast = useToast();
 
   const [mutate, { loading }] = useMutation(PRODUCT_DELETE, {
+    refetchQueries: [GET_PRODUCTS, 'products'],
     onCompleted: (data) => {
       onClose();
       onCompleted(data);
