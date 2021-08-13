@@ -1,4 +1,3 @@
-import { useMutation } from '@apollo/client';
 import {
   Box,
   BoxProps,
@@ -16,6 +15,7 @@ import {
 } from '@chakra-ui/react';
 import { PRODUCT_DELETE } from '@constants/graphql/mutations';
 import { GET_PRODUCTS } from '@constants/graphql/queries';
+import { useMutation } from '@utils/api';
 import { FC } from 'react';
 
 interface Props extends Omit<BoxProps, 'onClick'> {

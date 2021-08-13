@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/client';
 import { Flex, HStack, Icon, IconButton, Image, Text, useToast } from '@chakra-ui/react';
 import AddToCartButton from '@components/AddToCartButton';
 import Loading from '@components/Loading';
@@ -6,6 +5,7 @@ import Redirect from '@components/Redirect';
 import { DEFAULT_PRODUCT_IMAGE } from '@constants/etc';
 import { GET_PRODUCTS, GET_PRODUCTS_AND_USER } from '@constants/graphql/queries';
 import { checkIfLoggedIn } from '@store/userSlice';
+import { useQuery } from '@utils/api';
 import Link from 'next/link';
 import { FC, useEffect } from 'react';
 import { FaEdit as IconEdit } from 'react-icons/fa';
@@ -21,7 +21,7 @@ const Product: FC<Props> = ({ id }) => {
   const toast = useToast();
   const isLoggedIn = useSelector(checkIfLoggedIn);
 
-  const { loading, error, data } = useQuery(isLoggedIn ? GET_PRODUCTS_AND_USER : GET_PRODUCTS, {
+  const { loading, inCache, error, data } = useQuery(isLoggedIn ? GET_PRODUCTS_AND_USER : GET_PRODUCTS, {
     variables: {
       filter: {
         id: {
@@ -51,7 +51,7 @@ const Product: FC<Props> = ({ id }) => {
   }, [shouldShowError, toast]);
 
   if (shouldShowError) return <Redirect />;
-  if (loading) return <Loading />;
+  if (loading && !inCache) return <Loading />;
 
   return (
     <Container

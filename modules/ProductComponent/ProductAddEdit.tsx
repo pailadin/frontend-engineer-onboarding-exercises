@@ -1,7 +1,8 @@
-import { DocumentNode, useMutation } from '@apollo/client';
+import { DocumentNode } from '@apollo/client';
 import { Button, Flex, Stack, Text, useToast } from '@chakra-ui/react';
 import { Input, InputTextarea } from '@components/Form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useMutation } from '@utils/api';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';

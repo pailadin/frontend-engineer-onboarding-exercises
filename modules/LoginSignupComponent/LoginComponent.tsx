@@ -1,10 +1,10 @@
-import { useMutation } from '@apollo/client';
 import { useToast } from '@chakra-ui/react';
 import { Input } from '@components/Form';
 import { LOGIN as MUTATION } from '@constants/graphql/mutations';
 import { LOGIN as VALIDATION_SCHEMA } from '@constants/validation/user';
 import { useAppDispatch as useDispatch } from '@store/hooks';
 import { checkIfLoggedIn, setUserToken } from '@store/userSlice';
+import { useMutation } from '@utils/api';
 import { useRouter } from 'next/router';
 import { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';

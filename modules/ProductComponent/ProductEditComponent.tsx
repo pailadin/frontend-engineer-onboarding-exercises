@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/client';
 import { useToast } from '@chakra-ui/react';
 import Loading from '@components/Loading';
 import Redirect from '@components/Redirect';
@@ -6,6 +5,7 @@ import { PRODUCT_EDIT } from '@constants/graphql/mutations';
 import { GET_PRODUCTS_AND_USER } from '@constants/graphql/queries';
 import { EDIT as VALIDATION_SCHEMA } from '@constants/validation/product';
 import { checkIfLoggedIn } from '@store/userSlice';
+import { useQuery } from '@utils/api';
 import { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import ProductAddEdit from './ProductAddEdit';
@@ -19,7 +19,7 @@ const ProductEdit: FC<Props> = ({ id }) => {
   const toast = useToast();
   const isLoggedIn = useSelector(checkIfLoggedIn);
 
-  const { loading, error, data } = useQuery(GET_PRODUCTS_AND_USER, {
+  const { loading, inCache, error, data } = useQuery(GET_PRODUCTS_AND_USER, {
     skip: !isLoggedIn,
     variables: {
       filter: {
@@ -49,7 +49,7 @@ const ProductEdit: FC<Props> = ({ id }) => {
   }, [shouldShowError, toast]);
 
   if (shouldShowError) return <Redirect />;
-  if (loading) return <Loading />;
+  if (loading && !inCache) return <Loading />;
 
   return (
     <ProductAddEdit
