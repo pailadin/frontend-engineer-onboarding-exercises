@@ -80,8 +80,7 @@ const ProductAddEdit: FC<Props> = ({
     void router.push(cancelUrl);
   };
 
-  const submitDisabled =
-    formMethods.formState.isSubmitting || !formMethods.formState.isDirty || !formMethods.formState.isValid;
+  const submitDisabled = formMethods.formState.isSubmitting || !formMethods.formState.isValid;
 
   return (
     <FormProvider {...formMethods}>
